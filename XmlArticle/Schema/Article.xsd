@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://sumgon.org/Article.xsd" xmlns:sumgon="http://sumgon.org/Article.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Article" targetNamespace="http://sumgon.org/Article.xsd" elementFormDefault="qualified">
+
+  <xs:annotation>
+    <xs:appinfo>1.0.1</xs:appinfo>
+    <xs:documentation>Version</xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="Article">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="StyleSheets" type="ArticleStyleSheetsType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="StyleDefinitions" type="ArticleStyleDefinitionsType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Title" type="ArticleTitleType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="Subtitle" type="ArticleSubtitleType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Authors" type="AuthorsType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Abstract" type="ArticleAbstractType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Introduction" type="ArticleIntroductionType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Body" type="ArticleBodyType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="References" type="ReferencesType" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:unique name="CiteKeyUnique">
+      <xs:selector xpath="sumgon:Paragraph/sumgon:Cite"/>
+      <xs:field xpath="@Id"/>
+    </xs:unique>
+    <xs:unique name="ReferenceKeyUnique">
+      <xs:selector xpath="sumgon:References/sumgon:Reference"/>
+      <xs:field xpath="@Id"/>
+    </xs:unique>
+    <xs:keyref name="ReferenceKeyReference" refer="ReferenceKey">
+      <xs:selector xpath="sumgon:Paragraph/sumgon:Cite"/>
+      <xs:field xpath="@ReferenceId"/>
+    </xs:keyref>
+    <xs:key name="ReferenceKey">
+      <xs:selector xpath="sumgon:References/sumgon:Reference"/>
+      <xs:field xpath="@Id"/>
+    </xs:key>
+  </xs:element>
+  
+  <!--Element Definition-->
+  
+  <!--Article Styles-->
+
+  <xs:complexType name="ArticleStyleSheetsType">
+    <xs:sequence>
+      <xs:element name="StyleSheet" type="ArticleStyleSheetType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="ArticleStyleSheetType">
+    <xs:attribute name="Source" type="ArticleStyleSheetSourceType" use="required"/>
+  </xs:complexType>
+
+  <!--End Article Styles-->
+  
+  <!--Article Style Definition-->
+
+  <xs:complexType name="ArticleStyleDefinitionsType">
+    <xs:sequence>
+      <xs:element name="TitleStyle" type="ArticleBasicTitleStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SubtitleStyle" type="ArticleBasicTitleStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Section1Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Section2Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Section3Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Section4Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Section5Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Section6Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--End Article Style Definition-->
+  
+  <!--Title and Subtitle-->
+  
+  <xs:complexType name="ArticleTitleType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="StyledText" type="TextContentType"/>
+      <xs:element name="LineBreak" type="LineBreakType"/>
+    </xs:choice>
+    
+  </xs:complexType>
+
+  <xs:complexType name="ArticleSubtitleType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="StyledText" type="TextContentType"/>
+      <xs:element name="LineBreak" type="LineBreakType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="ArticleBasicTitleStyleType">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+  </xs:complexType>
+  
+  <!--Abstract and Introduction-->
+
+  <xs:complexType name="ArticleAbstractType">
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Paragraph" type="ParagraphType"/>
+      <xs:element name="Image" type="ImageType"/>
+      <xs:element name="CodeBlock" type="CodeBlockType"/>
+      <xs:element name="BlockQuote" type="BlockQuoteType"/>
+      <xs:element name="Video" type="VideoType"/>
+      <xs:element name="Audio" type="AudioType"/>
+      <xs:element name="OrderedList" type="OrderedListType"/>
+      <xs:element name="UnorderedList" type="UnorderedListType"/>
+      <xs:element name="Table" type="TableType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="ArticleIntroductionType">
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Paragraph" type="ParagraphType"/>
+      <xs:element name="Image" type="ImageType"/>
+      <xs:element name="CodeBlock" type="CodeBlockType"/>
+      <xs:element name="BlockQuote" type="BlockQuoteType"/>
+      <xs:element name="Video" type="VideoType"/>
+      <xs:element name="Audio" type="AudioType"/>
+      <xs:element name="OrderedList" type="OrderedListType"/>
+      <xs:element name="UnorderedList" type="UnorderedListType"/>
+      <xs:element name="Table" type="TableType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!--End Abstract and Introduction-->
+  
+  <!--Article Body-->
+
+  <xs:complexType name="ArticleBodyType">
+    <xs:choice>
+      <xs:sequence>
+        <xs:element name="Section1" type="Section1Type" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">       
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:choice>
+    
+  </xs:complexType>
+  
+  <!--End Article Body-->
+  
+  <!--Section Type-->
+
+  <xs:complexType name="Section1Type">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType"/>
+      <xs:sequence>
+        <xs:element name="Section2" type="Section2Type" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Section2Type">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType"/>
+      <xs:sequence>
+        <xs:element name="Section3" type="Section3Type" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Section3Type">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType"/>
+      <xs:sequence>
+        <xs:element name="Section4" type="Section4Type" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Section4Type">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType"/>
+      <xs:sequence>
+        <xs:element name="Section5" type="Section5Type" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Section5Type">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="Section6" type="Section6Type" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:element name="Paragraph" type="ParagraphType"/>
+          <xs:element name="Image" type="ImageType"/>
+          <xs:element name="CodeBlock" type="CodeBlockType"/>
+          <xs:element name="BlockQuote" type="BlockQuoteType"/>
+          <xs:element name="Video" type="VideoType"/>
+          <xs:element name="Audio" type="AudioType"/>
+          <xs:element name="OrderedList" type="OrderedListType"/>
+          <xs:element name="UnorderedList" type="UnorderedListType"/>
+          <xs:element name="Table" type="TableType"/>
+        </xs:choice>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Section6Type">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType"/>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>      
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!--End Header Type-->
+
+  <!--Paragraph Type-->
+  <!--Block Element Cannot put into Paragraph-->
+  <xs:complexType name="ParagraphType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="StyledText" type="TextContentType"/>
+      <xs:element name="DeletedText" type="DeletedTextType"/>
+      <xs:element name="InsertedText" type="InsertedTextType"/>
+      <xs:element name="MarkedText" type="MarkedTextType"/>
+      <xs:element name="Superscript" type="SuperscriptType"/>
+      <xs:element name="Subscript" type="SubscriptType"/>
+      <xs:element name="Quote" type="QuoteType"/>
+      <xs:element name="Cite" type="CiteType"/>      
+      <xs:element name="Hyperlink" type="HyperlinkType"/>      
+      <xs:element name="LineBreak" type="LineBreakType"/>
+      <xs:element name="Space" type="SpaceType"/>
+    </xs:choice>
+    <xs:attribute name="Indent" type="xs:unsignedByte"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+  </xs:complexType>
+
+  <!--End Paragraph Tyle-->
+  
+  <!--Author Type-->
+
+  <xs:complexType name="AuthorsType">
+    <xs:sequence>
+      <xs:element name="Author" type="AuthorType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthorType">
+    <xs:simpleContent>
+      <xs:extension base="TextContentType">
+        <xs:attribute name="Source" type="xs:token"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!--End Author Type-->
+
+  <!--List Type-->
+
+  <xs:complexType name="OrderedListType">
+    <xs:sequence>
+      <xs:element name="Item" type="ListItemType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
+    <xs:attribute name="CounterFontWeight" type="FontWeightType"/>
+  </xs:complexType>
+
+  <xs:complexType name="UnorderedListType">
+    <xs:sequence>
+      <xs:element name="Item" type="ListItemType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="ListStyle" type="UnorderedListStyleType"/>
+  </xs:complexType>
+
+  <xs:complexType name="ListItemType">
+    <xs:sequence>
+      <xs:element name="Label" type="TextContentType" minOccurs="1" maxOccurs="1"/>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!--End List Type-->
+
+  <!--Table Type-->
+  
+  <xs:complexType name="TableType">
+    <xs:sequence>
+      <xs:element name="Caption" type="TableCaptionType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ColumnStyles" type="TableColumnStylesType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Header" type="TableHeaderType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Body" type="TableBodyType" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+  </xs:complexType>
+
+  <xs:complexType name="TableColumnStylesType">
+    <xs:sequence>
+      <xs:element name="ColumnStyle" type="TableColumnStyleType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TableColumnStyleType">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+  </xs:complexType>
+
+  <xs:complexType name="TableHeaderType">
+    <xs:sequence>
+      <xs:element name="HeaderCell" type="TableHeaderCellType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+  </xs:complexType>
+
+  <xs:complexType name="TableBodyType">
+    <xs:sequence>
+      <xs:element name="Row" type="TableRowType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TableRowType">
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="HeaderCell" type="TableHeaderCellType"/>
+      <xs:element name="DataCell" type="TableDataCellType"/>
+    </xs:choice>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+  </xs:complexType>
+
+  <xs:complexType name="TableHeaderCellType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="StyledText" type="TextContentType"/>
+      <xs:element name="Hyperlink" type="HyperlinkType"/>
+    </xs:choice>
+    <xs:attribute name="ColumnSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="RowSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+  </xs:complexType>
+
+  <xs:complexType name="TableDataCellType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="StyledText" type="TextContentType"/>
+      <xs:element name="Hyperlink" type="HyperlinkType"/>
+      <xs:element name="Image" type="ImageType"/>
+    </xs:choice>
+    <xs:attribute name="ColumnSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="RowSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+  </xs:complexType>
+
+  <xs:complexType name="TableCaptionType">
+    <xs:simpleContent>
+      <xs:extension base="TextContentType">
+        <xs:attribute name="CaptionSide" type="TableCaptionSideType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <!--End Table Type-->
+  
+  <!--Reference and Cite Type-->
+
+  <xs:complexType name="ReferencesType">
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Reference" type="ReferenceType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
+  </xs:complexType>
+
+  <xs:complexType name="ReferenceType">
+    <xs:simpleContent>
+      <xs:extension base="TextContentType">
+        <xs:attribute name="Id" type="xs:token" use="required"/>
+        <xs:attribute name="Source" type="xs:token"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="CiteType">
+    <xs:simpleContent>
+      <xs:extension base="TextContentType">
+        <xs:attribute name="Id" type="xs:token" use="required"/>
+        <xs:attribute name="ReferenceId" type="xs:token" use="required"/>
+        <xs:attribute name="ReferenceDescription" type="xs:token"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <!--End References and Cite Type-->
+
+  <!--Base Element Type-->
+  
+  <xs:complexType name="TextContentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:token">
+        <xs:attribute name="FontSize" type="FontSizeType"/>
+        <xs:attribute name="FontFamily" type="FontFamilyType"/>
+        <xs:attribute name="FontStretch" type="FontStretchType"/>
+        <xs:attribute name="FontStyle" type="FontStyleType"/>
+        <xs:attribute name="FontWeight" type="FontWeightType"/>
+        <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+        <xs:attribute name="FontColor" type="ColorType"/>
+        <xs:attribute name="BackgroundColor" type="ColorType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="HyperlinkType">
+    <xs:simpleContent>
+      <xs:extension base="TextContentType">
+        <xs:attribute name="Source" type="xs:token" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="ImageType">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="Description" type="xs:token"/>
+    <xs:attribute name="Width" type="WidthType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:complexType>
+
+  <xs:complexType name="VideoType">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="Description" type="xs:token"/>
+    <xs:attribute name="Width" type="WidthType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+  </xs:complexType>
+  
+  <xs:complexType name="AudioType">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="Description" type="xs:token"/>
+    <xs:attribute name="Width" type="WidthType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+  </xs:complexType>
+
+  <xs:complexType name="LineBreakType"/>
+  
+  <xs:complexType name="SpaceType"/>
+
+  <xs:complexType name="DeletedTextType">
+    <xs:simpleContent>
+      <xs:restriction base="TextContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="InsertedTextType">
+    <xs:simpleContent>
+      <xs:restriction base="TextContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:complexType name="MarkedTextType">
+    <xs:simpleContent>
+      <xs:restriction base="TextContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="SuperscriptType">
+    <xs:simpleContent>
+      <xs:restriction base="TextContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="SubscriptType">
+    <xs:simpleContent>
+      <xs:restriction base="TextContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="QuoteType">
+    <xs:simpleContent>
+      <xs:extension base="TextContentType">
+        <xs:attribute name="Source" type="xs:token"/>
+        <xs:attribute name="QuoteStyle" type="QuoteStyleType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="CodeBlockType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Language" type="CodeBlockLanguageType" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="BlockQuoteType">
+    <xs:sequence>
+      <xs:element name="Paragraph" type="ParagraphType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Source" type="xs:token"/>
+  </xs:complexType>
+  
+  <!--End Base Element Type-->
+
+
+  <!--Attribute Type-->
+
+  <xs:simpleType name="TextAlignmentType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Left"/>
+      <xs:enumeration value="Right"/>
+      <xs:enumeration value="Center"/>
+      <xs:enumeration value="Justify"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FontSizeType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^[0-9]*\.?[0-9]*(%|px|pt|pc|em|cm|mm|in|rem|ch)$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FontFamilyType">
+    <xs:restriction base="xs:token"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="FontStretchType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="UltraCondensed"/>
+      <xs:enumeration value="ExtraCondensed"/>
+      <xs:enumeration value="Condensed"/>
+      <xs:enumeration value="SemiCondensed"/>
+      <xs:enumeration value="Normal"/>
+      <xs:enumeration value="SemiExpanded"/>
+      <xs:enumeration value="Expanded"/>
+      <xs:enumeration value="ExtraExpanded"/>
+      <xs:enumeration value="UltraExpanded"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FontStyleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Normal"/>
+      <xs:enumeration value="Italic"/>
+      <xs:enumeration value="Oblique"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FontWeightType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Normal"/>
+      <xs:enumeration value="Light"/>
+      <xs:enumeration value="Bold"/>
+      <xs:enumeration value="ExtraBold"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="UnderlineStyleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="SingleLine"/>
+      <xs:enumeration value="DoubleLine"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="WidthType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="HeightType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ColorType">
+    <xs:restriction base="xs:token">
+      <!--Color Name or Hex-->
+      <xs:pattern value="((AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGray|DarkGrey|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|DarkOrange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGray|DarkSlateGrey|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGray|DimGrey|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gray|Grey|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGray|LightGrey|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGray|LightSlateGrey|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|RebeccaPurple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGray|SlateGrey|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen)|^(0[xX]){1}[A-Fa-f0-9]{6}$|^#[A-Fa-f0-9]{6}$)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="QuoteStyleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Default"/>
+      <xs:enumeration value="Chinese"/>
+      <xs:enumeration value="None"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CodeBlockLanguageType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="C#"/>
+      <xs:enumeration value="Python"/>
+      <xs:enumeration value="JavaScript"/>
+      <xs:enumeration value="Html"/>
+      <xs:enumeration value="Xml"/>
+      <xs:enumeration value="Markup"/>
+      <xs:enumeration value="Svg"/>
+      <xs:enumeration value="SQL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="OrderedListStyleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Decimal"/>
+      <xs:enumeration value="SequentialDecimal"/>
+      <xs:enumeration value="LowerAlpha"/>
+      <xs:enumeration value="UpperAlpha"/>
+      <xs:enumeration value="LowerRoman"/>
+      <xs:enumeration value="UpperRoman"/>
+      <xs:enumeration value="Hiragana"/>
+      <xs:enumeration value="HiraganaIroha"/>
+      <xs:enumeration value="Katakana"/>
+      <xs:enumeration value="KatakanaIroha"/>
+      <xs:enumeration value="SimplifiedChineseInformal"/>
+      <xs:enumeration value="SimplifiedChineseFormal"/>
+      <xs:enumeration value="TraditionalChineseInformal"/>
+      <xs:enumeration value="TraditionalChineseFormal"/>
+      <xs:enumeration value="LowerGreek"/>
+      <xs:enumeration value="Armenian"/>
+      <xs:enumeration value="Georgian"/>
+      <xs:enumeration value="Hebrew"/>
+      <xs:enumeration value="BracketedSimplifiedChineseInformal"/>
+      <xs:enumeration value="ChineseBracketedSimplifiedChineseInformal"/>
+      <xs:enumeration value="BracketedSimplifiedChineseFormal"/>
+      <xs:enumeration value="ChineseBracketedSimplifiedChineseFormal"/>
+      <xs:enumeration value="BracketedDecimal"/>
+      <xs:enumeration value="ChineseBracketedDecimal"/>
+      <xs:enumeration value="BracketedLowerAlpha"/>
+      <xs:enumeration value="BracketedUpperAlpha"/>      
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="UnorderedListStyleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Disc"/>
+      <xs:enumeration value="Circle"/>
+      <xs:enumeration value="Square"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SectionStyleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Disc"/>
+      <xs:enumeration value="Circle"/>
+      <xs:enumeration value="Square"/>
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Decimal"/>
+      <xs:enumeration value="SequentialDecimal"/>
+      <xs:enumeration value="LowerAlpha"/>
+      <xs:enumeration value="UpperAlpha"/>
+      <xs:enumeration value="LowerRoman"/>
+      <xs:enumeration value="UpperRoman"/>
+      <xs:enumeration value="Hiragana"/>
+      <xs:enumeration value="HiraganaIroha"/>
+      <xs:enumeration value="Katakana"/>
+      <xs:enumeration value="KatakanaIroha"/>
+      <xs:enumeration value="SimplifiedChineseInformal"/>
+      <xs:enumeration value="SimplifiedChineseFormal"/>
+      <xs:enumeration value="TraditionalChineseInformal"/>
+      <xs:enumeration value="TraditionalChineseFormal"/>
+      <xs:enumeration value="LowerGreek"/>
+      <xs:enumeration value="Armenian"/>
+      <xs:enumeration value="Georgian"/>
+      <xs:enumeration value="Hebrew"/>
+      <xs:enumeration value="BracketedSimplifiedChineseInformal"/>
+      <xs:enumeration value="ChineseBracketedSimplifiedChineseInformal"/>
+      <xs:enumeration value="BracketedSimplifiedChineseFormal"/>
+      <xs:enumeration value="ChineseBracketedSimplifiedChineseFormal"/>
+      <xs:enumeration value="BracketedDecimal"/>
+      <xs:enumeration value="ChineseBracketedDecimal"/>
+      <xs:enumeration value="BracketedLowerAlpha"/>
+      <xs:enumeration value="BracketedUpperAlpha"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="HorizontalAlignmentType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Left"/>
+      <xs:enumeration value="Center"/>
+      <xs:enumeration value="Right"/>
+      <xs:enumeration value="Stretch"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="VerticalAlignmentType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Top"/>
+      <xs:enumeration value="Center"/>
+      <xs:enumeration value="Bottom"/>
+      <xs:enumeration value="Stretch"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TableCaptionSideType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="Top"/>
+      <xs:enumeration value="Bottom"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LineHeightType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^([0-9]*\.?[0-9]|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ArticleStyleSheetSourceType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^.*\.(c|C)(s|S)(s|S)$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="MarginType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

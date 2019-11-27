@@ -1,0 +1,368 @@
+/*文章容器*/
+/* body{
+    width: 50%;
+    margin: auto;
+} */
+
+/* 取消默认margin*/
+blockquote,body,dd,dl,fieldset,figure,form,h1,h2,h3,h4,h5,h6,hr,menu,ol,p,pre,ul,video,audio{
+    margin:0;
+}
+
+/* 取消默认padding*/
+fieldset,legend,menu,ol,ul{
+    padding: 0;
+}
+
+/* 取消cite默认斜体*/
+cite{
+    font-style: normal;
+}
+
+sup{
+    font-size: 50%;
+}
+
+article {
+    display: table;
+    margin: auto;
+    width: 50%;
+    word-break: break-word;
+}
+
+/*一级标题，文章主标题，居中*/
+
+div.title {
+    text-align: center;
+    font-size: 20pt;
+}
+
+
+
+div.subtitle {
+    text-align: center;
+}
+
+div.authors {
+    display:table;
+    margin-left:auto;
+    margin-right:auto;
+    font-size: 16pt;
+}
+
+div.abstract {
+    text-align: justify
+}
+
+p {
+    text-indent: 2ch;
+    line-height: 1.4;
+    font-family: fangsong;
+    margin-bottom: 0;
+    font-size: 16pt;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+div.references-header{
+    font-size: 20pt;
+}
+
+
+div.signature {
+    float: right;
+}
+
+div.signature-item {
+    text-align: center;
+}
+
+.single-underline {
+    text-decoration: underline;
+}
+
+.double-underline {
+    display: inline;
+    text-decoration: underline;
+    border-bottom-width: 0.10em;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+img{
+    display:table;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:2ch;
+    margin-bottom:2ch;
+}
+
+/*header*/
+
+h1,h2,h3.h4.h5.h6{
+    display: inline-block;
+}
+
+/*end header*/
+
+/*ordered list*/
+ol li{
+    margin-left: 1ch;
+}
+
+ol.list-style-none>li::before{
+    content: none;
+}
+
+ol{
+    list-style-type: none;
+    counter-reset: item;
+    margin-left: -1.2ch;
+}
+
+ol>li:before,ol.list-style-decimal>li:before{
+    counter-increment: item;
+    content: counter(item,decimal) ".";
+}
+
+ol.list-style-sequential-decimal > li:before {
+    counter-increment: item;
+    content: counters(item,".",decimal) " ";
+}
+
+ol.list-style-lower-alpha>li:before{
+    counter-increment: item;
+    content: counter(item,lower-alpha) " ";
+}
+
+ol.list-style-upper-alpha>li:before{
+    counter-increment: item;
+    content: counter(item,upper-alpha) " ";
+}
+
+ol.list-style-lower-roman>li:before{
+    counter-increment: item;
+    content: counter(item,lower-roman) " ";
+}
+
+ol.list-style-upper-roman>li:before{
+    counter-increment: item;
+    content: counter(item,upper-roman) " ";
+}
+
+ol.list-style-hiragana>li:before{
+    counter-increment: item;
+    content: counter(item,hiragana) " ";
+}
+
+ol.list-style-hiragana-iroha>li:before{
+    counter-increment: item;
+    content: counter(item,hiragana-iroha) " ";
+}
+
+ol.list-style-katakana>li:before{
+    counter-increment: item;
+    content: counter(item,katakana) " ";
+}
+
+ol.list-style-katakana-iroha>li:before{
+    counter-increment: item;
+    content: counter(item,katakana-iroha) " ";
+}
+
+ol.list-style-simplified-chinese-informal>li:before{
+    counter-increment: item;
+    content: counter(item,simp-chinese-informal) "、";
+    
+}
+
+ol.list-style-simplified-chinese-formal>li:before{
+    counter-increment: item;
+    content: counter(item,simp-chinese-formal) "、";
+}
+
+ol.list-style-traditional-chinese-informal>li:before{
+    counter-increment: item;
+    content: counter(item,trad-chinese-informal) "、";
+    
+}
+
+ol.list-style-traditional-chinese-formal>li:before{
+    counter-increment: item;
+    content: counter(item,trad-chinese-formal) "、";
+}
+
+ol.list-style-lower-greek>li:before{
+    counter-increment: item;
+    content: counter(item,lower-greek) " ";
+}
+
+ol.list-style-armenian>li:before{
+    counter-increment: item;
+    content: counter(item,armenian) " ";
+}
+
+ol.list-style-georgian>li:before{
+    counter-increment: item;
+    content: counter(item,georgian) " ";
+}
+
+ol.list-style-hebrew>li:before{
+    counter-increment: item;
+    content: counter(item,hebrew) " ";
+}
+
+ol.list-style-bracketed-simplified-chinese-informal>li:before{
+    counter-increment: item;
+    content: "(" counter(item,simp-chinese-informal) ") ";
+}
+
+/* 用中文括号的话会存在一些对齐问题，因为中文括号左右自带一点margin，但内部和英文括号是一样的 */
+ol.list-style-chinese-bracketed-simplified-chinese-informal>li:before{
+    counter-increment: item;
+    content: "（" counter(item,simp-chinese-informal) "）";
+}
+
+ol.list-style-bracketed-simplified-chinese-formal>li:before{
+    counter-increment: item;
+    content: "(" counter(item,simp-chinese-formal) ") ";
+}
+
+/* 用中文括号的话会存在一些对齐问题，因为中文括号左右自带一点margin，但内部和英文括号是一样的 */
+ol.list-style-chinese-bracketed-simplified-chinese-formal>li:before{
+    counter-increment: item;
+    content: "（" counter(item,simp-chinese-formal) "）";
+}
+
+ol.list-style-bracketed-decimal>li:before{
+    counter-increment: item;
+    content: "(" counter(item,decimal) ") ";
+}
+
+/* 用中文括号的话会存在一些对齐问题，因为中文括号左右自带一点margin，但内部和英文括号是一样的 */
+ol.list-style-chinese-bracketed-decimal>li:before{
+    counter-increment: item;
+    content: "（" counter(item,decimal) "）";
+}
+
+ol.list-style-bracketed-lower-alpha>li:before{
+    counter-increment: item;
+    content: "(" counter(item,lower-alpha) ") ";
+}
+
+ol.list-style-bracketed-upper-alpha>li:before{
+    counter-increment: item;
+    content: "(" counter(item,upper-alpha) ") ";
+}
+
+/* ol.list-style-sequential-lower-roman > li:before {
+    counter-increment: item;
+    content: counters(item,".",lower-roman) " ";
+} */
+
+/*end ordered list*/
+
+/*ordered list counter style*/
+
+ol.counter-font-weight-light>li::before{
+    font-weight: lighter;
+}
+
+ol.counter-font-weight-bold>li::before{
+    font-weight: bold;
+}
+
+ol.counter-font-weight-extrabold>li::before{
+    font-weight: bolder;
+}
+
+/*end ordered list counter style*/
+
+/*unordered list*/
+ul li{
+    margin-left: 1ch;
+}
+
+ul{
+    list-style-type: none;
+    counter-reset: item;
+}
+
+ul.list-style-disc>li::before{
+    counter-increment: item;
+    content: counter(item,disc);
+}
+
+ul.list-style-circle>li::before{
+    counter-increment: item;
+    content: counter(item,circle);
+}
+
+ul.list-style-square>li::before{
+    counter-increment: item;
+    content: counter(item,square);
+}
+
+/*end unordered list*/
+
+/*horizontal and vertical alignment*/
+
+.horizontal-alignment-left{
+    float: left;
+}
+
+.horizontal-alignment-center{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.horizontal-alignment-right{
+    float: right;
+}
+
+.horizontal-alignment-stretch{
+    width: 100%;
+}
+
+.vertical-alignment-top{
+    vertical-align: top;
+}
+
+.vertical-alignment-center{
+    vertical-align: baseline;
+}
+
+.vertical-alignment-bottom{
+    vertical-align: bottom;
+}
+
+.vertical-alignment-stretch{
+    height: 100%;
+}
+
+/*end horizontal and vertical alignment*/
+
+/*q element style*/
+
+q.quote-chinese::before{
+    content: "“";
+}
+
+q.quote-chinese::after{
+    content: "”";
+}
+
+q.quote-none::before{
+    content: "";
+}
+
+q.quote-none::after{
+    content: "";
+}
+
+/*end q element style*/
