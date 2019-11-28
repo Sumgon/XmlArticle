@@ -77,8 +77,7 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="StyledText" type="TextContentType"/>
       <xs:element name="LineBreak" type="LineBreakType"/>
-    </xs:choice>
-    
+    </xs:choice>    
   </xs:complexType>
 
   <xs:complexType name="ArticleSubtitleType" mixed="true">
@@ -104,31 +103,37 @@
   <!--Abstract and Introduction-->
 
   <xs:complexType name="ArticleAbstractType">
-    <xs:choice minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Paragraph" type="ParagraphType"/>
-      <xs:element name="Image" type="ImageType"/>
-      <xs:element name="CodeBlock" type="CodeBlockType"/>
-      <xs:element name="BlockQuote" type="BlockQuoteType"/>
-      <xs:element name="Video" type="VideoType"/>
-      <xs:element name="Audio" type="AudioType"/>
-      <xs:element name="OrderedList" type="OrderedListType"/>
-      <xs:element name="UnorderedList" type="UnorderedListType"/>
-      <xs:element name="Table" type="TableType"/>
-    </xs:choice>
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType" minOccurs="0" maxOccurs="1"/>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="ArticleIntroductionType">
-    <xs:choice minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Paragraph" type="ParagraphType"/>
-      <xs:element name="Image" type="ImageType"/>
-      <xs:element name="CodeBlock" type="CodeBlockType"/>
-      <xs:element name="BlockQuote" type="BlockQuoteType"/>
-      <xs:element name="Video" type="VideoType"/>
-      <xs:element name="Audio" type="AudioType"/>
-      <xs:element name="OrderedList" type="OrderedListType"/>
-      <xs:element name="UnorderedList" type="UnorderedListType"/>
-      <xs:element name="Table" type="TableType"/>
-    </xs:choice>
+    <xs:sequence>
+      <xs:element name="Header" type="TextContentType" minOccurs="0" maxOccurs="1"/>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="Paragraph" type="ParagraphType"/>
+        <xs:element name="Image" type="ImageType"/>
+        <xs:element name="CodeBlock" type="CodeBlockType"/>
+        <xs:element name="BlockQuote" type="BlockQuoteType"/>
+        <xs:element name="Video" type="VideoType"/>
+        <xs:element name="Audio" type="AudioType"/>
+        <xs:element name="OrderedList" type="OrderedListType"/>
+        <xs:element name="UnorderedList" type="UnorderedListType"/>
+        <xs:element name="Table" type="TableType"/>
+      </xs:choice>
+    </xs:sequence>
   </xs:complexType>
 
   <!--End Abstract and Introduction-->
