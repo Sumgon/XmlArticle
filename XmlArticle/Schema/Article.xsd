@@ -96,6 +96,22 @@
     <xs:attribute name="TopMargin" type="MarginType"/>
     <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:complexType>
+  
+  <xs:complexType name="ParagraphStyle">
+    <xs:attribute name="Indent" type="xs:unsignedByte"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:complexType>
 
   <!--End Article Style Definition-->
   
@@ -119,7 +135,7 @@
 
   <xs:complexType name="ArticleAbstractType">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Title" type="TextContentType" minOccurs="0" maxOccurs="1"/>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
@@ -136,7 +152,7 @@
 
   <xs:complexType name="ArticleIntroductionType">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Title" type="TextContentType" minOccurs="0" maxOccurs="1"/>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
@@ -335,6 +351,8 @@
     <xs:attribute name="FontColor" type="ColorType"/>
     <xs:attribute name="BackgroundColor" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:complexType>
 
   <!--End Paragraph Tyle-->
@@ -345,6 +363,9 @@
     <xs:sequence>
       <xs:element name="Author" type="AuthorType"/>
     </xs:sequence>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:complexType>
 
   <xs:complexType name="AuthorType">
@@ -376,7 +397,7 @@
 
   <xs:complexType name="ListItemType">
     <xs:sequence>
-      <xs:element name="Label" type="TextContentType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Heading" type="TextContentType" minOccurs="1" maxOccurs="1"/>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="OrderedList" type="OrderedListType"/>
@@ -395,6 +416,10 @@
 
   <!--Table Type-->
   
+  <!--Width对列是有用的，只要设置了某一列上的一个单元格就会整列适用-->
+  <!--Height对tr是有用的-->
+  <!--设置单元格内部只能用padding，而且只能一个个单元格设置，但是会影响到列宽和行高-->
+  
   <xs:complexType name="TableType">
     <xs:sequence>
       <xs:element name="Caption" type="TableCaptionType" minOccurs="0" maxOccurs="1"/>
@@ -403,6 +428,11 @@
       <xs:element name="Body" type="TableBodyType" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="RowHeight" type="HeightType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
   </xs:complexType>
 
   <xs:complexType name="TableColumnStylesType">
@@ -476,10 +506,11 @@
 
   <xs:complexType name="ReferencesType">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Heading" type="TextContentType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Reference" type="ReferenceType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
+    
   </xs:complexType>
 
   <xs:complexType name="ReferenceType">
@@ -613,7 +644,6 @@
   </xs:complexType>
   
   <!--End Base Element Type-->
-
 
   <!--Attribute Type-->
 
@@ -828,6 +858,12 @@
   </xs:simpleType>
 
   <xs:simpleType name="MarginType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="PaddingType">
     <xs:restriction base="xs:token">
       <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
     </xs:restriction>
