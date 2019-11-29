@@ -40,7 +40,7 @@
   
   <!--Element Definition-->
   
-  <!--Article Styles-->
+  <!--Article Style Sheets-->
 
   <xs:complexType name="ArticleStyleSheetsType">
     <xs:sequence>
@@ -52,7 +52,7 @@
     <xs:attribute name="Source" type="ArticleStyleSheetSourceType" use="required"/>
   </xs:complexType>
 
-  <!--End Article Styles-->
+  <!--End Article Style Sheets-->
   
   <!--Article Style Definition-->
 
@@ -67,6 +67,34 @@
       <xs:element name="Section5Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Section6Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArticleBasicTitleStyleType">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+  </xs:complexType>
+
+  <xs:complexType name="SectionStyleType">
+    <xs:attribute name="ListStyle" type="SectionListStyleType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:complexType>
 
   <!--End Article Style Definition-->
@@ -86,20 +114,7 @@
       <xs:element name="LineBreak" type="LineBreakType"/>
     </xs:choice>
   </xs:complexType>
-
-  <xs:complexType name="ArticleBasicTitleStyleType">
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="FontSize" type="FontSizeType"/>
-    <xs:attribute name="FontFamily" type="FontFamilyType"/>
-    <xs:attribute name="FontStretch" type="FontStretchType"/>
-    <xs:attribute name="FontStyle" type="FontStyleType"/>
-    <xs:attribute name="FontWeight" type="FontWeightType"/>
-    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
-    <xs:attribute name="LineHeight" type="LineHeightType"/>
-  </xs:complexType>
-  
+ 
   <!--Abstract and Introduction-->
 
   <xs:complexType name="ArticleAbstractType">
@@ -166,30 +181,34 @@
 
   <xs:complexType name="Section1Type">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType"/>
-      <xs:sequence>
-        <xs:element name="Section2" type="Section2Type" minOccurs="1" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
-        <xs:element name="Paragraph" type="ParagraphType"/>
-        <xs:element name="Image" type="ImageType"/>
-        <xs:element name="CodeBlock" type="CodeBlockType"/>
-        <xs:element name="BlockQuote" type="BlockQuoteType"/>
-        <xs:element name="Video" type="VideoType"/>
-        <xs:element name="Audio" type="AudioType"/>
-        <xs:element name="OrderedList" type="OrderedListType"/>
-        <xs:element name="UnorderedList" type="UnorderedListType"/>
-        <xs:element name="Table" type="TableType"/>
-      </xs:choice>
+      <xs:element name="Heading" type="TextContentType"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="Section2" type="Section2Type" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:element name="Paragraph" type="ParagraphType"/>
+          <xs:element name="Image" type="ImageType"/>
+          <xs:element name="CodeBlock" type="CodeBlockType"/>
+          <xs:element name="BlockQuote" type="BlockQuoteType"/>
+          <xs:element name="Video" type="VideoType"/>
+          <xs:element name="Audio" type="AudioType"/>
+          <xs:element name="OrderedList" type="OrderedListType"/>
+          <xs:element name="UnorderedList" type="UnorderedListType"/>
+          <xs:element name="Table" type="TableType"/>
+        </xs:choice>
+      </xs:choice>      
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="Section2Type">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType"/>
-      <xs:sequence>
-        <xs:element name="Section3" type="Section3Type" minOccurs="1" maxOccurs="unbounded"/>
-      </xs:sequence>
+      <xs:element name="Heading" type="TextContentType"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="Section3" type="Section3Type" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:choice>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
@@ -206,11 +225,13 @@
 
   <xs:complexType name="Section3Type">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType"/>
-      <xs:sequence>
-        <xs:element name="Section4" type="Section4Type" minOccurs="1" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Heading" type="TextContentType"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="Section4" type="Section4Type" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>       
+      </xs:choice>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">        
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
         <xs:element name="CodeBlock" type="CodeBlockType"/>
@@ -226,27 +247,29 @@
 
   <xs:complexType name="Section4Type">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType"/>
-      <xs:sequence>
-        <xs:element name="Section5" type="Section5Type" minOccurs="1" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
-        <xs:element name="Paragraph" type="ParagraphType"/>
-        <xs:element name="Image" type="ImageType"/>
-        <xs:element name="CodeBlock" type="CodeBlockType"/>
-        <xs:element name="BlockQuote" type="BlockQuoteType"/>
-        <xs:element name="Video" type="VideoType"/>
-        <xs:element name="Audio" type="AudioType"/>
-        <xs:element name="OrderedList" type="OrderedListType"/>
-        <xs:element name="UnorderedList" type="UnorderedListType"/>
-        <xs:element name="Table" type="TableType"/>
-      </xs:choice>
+      <xs:element name="Heading" type="TextContentType"/>
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="Section5" type="Section5Type" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+          <xs:element name="Paragraph" type="ParagraphType"/>
+          <xs:element name="Image" type="ImageType"/>
+          <xs:element name="CodeBlock" type="CodeBlockType"/>
+          <xs:element name="BlockQuote" type="BlockQuoteType"/>
+          <xs:element name="Video" type="VideoType"/>
+          <xs:element name="Audio" type="AudioType"/>
+          <xs:element name="OrderedList" type="OrderedListType"/>
+          <xs:element name="UnorderedList" type="UnorderedListType"/>
+          <xs:element name="Table" type="TableType"/>
+        </xs:choice>
+      </xs:choice>     
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="Section5Type">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType"/>
+      <xs:element name="Heading" type="TextContentType"/>
       <xs:choice>
         <xs:sequence>
           <xs:element name="Section6" type="Section6Type" minOccurs="1" maxOccurs="unbounded"/>
@@ -268,7 +291,7 @@
 
   <xs:complexType name="Section6Type">
     <xs:sequence>
-      <xs:element name="Header" type="TextContentType"/>
+      <xs:element name="Heading" type="TextContentType"/>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
@@ -732,7 +755,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="SectionStyleType">
+  <xs:simpleType name="SectionListStyleType">
     <xs:restriction base="xs:token">
       <xs:enumeration value="Disc"/>
       <xs:enumeration value="Circle"/>

@@ -1,0 +1,65 @@
+article {
+    /* Set "section" to 0 */
+    counter-reset: section1;
+}
+
+h1 {
+    /* Set "section2" to 0 */
+    counter-reset: section2;
+}
+
+h2 {
+    /* Set "section2" to 0 */
+    counter-reset: section3;
+}
+
+h3 {
+    /* Set "section2" to 0 */
+    counter-reset: section4;
+}
+
+h4 {
+    /* Set "section2" to 0 */
+    counter-reset: section5;
+}
+
+h5 {
+    /* Set "section2" to 0 */
+    counter-reset: section6;
+}
+
+h1::before {
+    /* Increment "section" by 1 */
+    counter-increment: section1;
+    content: counter(section1) " ";
+}
+
+h2::before {
+    /* Increment "section2" by 1 */
+    counter-increment: section2;
+    content: counter(section1) "." counter(section2) " ";
+}
+
+h3::before {
+    /* Increment "section3" by 1 */
+    counter-increment: section3;
+    content: counter(section1) "." counter(section2) "." counter(section3) " ";
+}
+
+h4::before {
+    /* Increment "section4" by 1 */
+    counter-increment: section4;
+    content: counter(section1) "." counter(section2) "." counter(section3) "." counter(section4) " ";
+}
+
+h5::before {
+    /* Increment "section5" by 1 */
+    counter-increment: section5;
+    content: counter(section1) "." counter(section2) "." counter(section3) "." counter(section4) "." counter(section5) " ";
+}
+
+h6::before {
+    /* Increment "section6" by 1 */
+    counter-increment: section6;
+    content: counter(section1) "." counter(section2) "." counter(section3) "." counter(section4) "." counter(section5) "." counter(section6) " ";
+}

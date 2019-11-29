@@ -287,344 +287,36 @@
   <!--End Article-->
   
   <!--Header-->
-  
-  <xsl:template match="x:Header1">
+  <xsl:template match="x:Section1">
+    
+  </xsl:template>
+
+  <xsl:template match="x:Section5">
     <li>
-      <xsl:for-each select="current()/*">
-        <xsl:choose>
-          <xsl:when test="self::x:Header">
-            <xsl:call-template name="TextContentTemplate">
-              <xsl:with-param name="Tag" select="'h1'"/>           
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="self::x:Paragraph">
-            <xsl:call-template name="ParagraphTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Section">
-            <xsl:call-template name="Header2SectionTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:BlockQuote">
-            <xsl:call-template name="BlockQuoteTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Video">
-            <xsl:call-template name="VideoTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Audio">
-            <xsl:call-template name="AudioTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:OrderedList">
-            <xsl:call-template name="OrderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:UnorderedList">
-            <xsl:call-template name="UnorderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Table">
-            <xsl:call-template name="TableTemplate"/>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
+      <xsl:apply-templates select="x:Title" mode="Section"/>
+      <xsl:choose>
+        <xsl:when test="x:Section6">
+          <ol>
+            <!--这里需要读Section6的配置-->
+            <xsl:apply-templates select="x:Section6"/>
+          </ol>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </li>
   </xsl:template>
 
-  <xsl:template match="x:Header2">
+  <xsl:template match="x:Section6">
     <li>
-      <xsl:for-each select="current()/*">
-        <xsl:choose>
-          <xsl:when test="self::x:Header">
-            <xsl:call-template name="TextContentTemplate">
-              <xsl:with-param name="Tag" select="'h2'"/>           
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="self::x:Paragraph">
-            <xsl:call-template name="ParagraphTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Section">
-            <xsl:call-template name="Header3SectionTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:BlockQuote">
-            <xsl:call-template name="BlockQuoteTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Video">
-            <xsl:call-template name="VideoTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Audio">
-            <xsl:call-template name="AudioTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:OrderedList">
-            <xsl:call-template name="OrderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:UnorderedList">
-            <xsl:call-template name="UnorderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Table">
-            <xsl:call-template name="TableTemplate"/>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
+      <xsl:apply-templates select="x:Title" mode="Section"/>
+      <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
     </li>
   </xsl:template>
 
-  <xsl:template match="x:Header3">
-    <li>
-      <xsl:for-each select="current()/*">
-        <xsl:choose>
-          <xsl:when test="self::x:Header">
-            <xsl:call-template name="TextContentTemplate">
-              <xsl:with-param name="Tag" select="'h3'"/>           
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="self::x:Paragraph">
-            <xsl:call-template name="ParagraphTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Section">
-            <xsl:call-template name="Header4SectionTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:BlockQuote">
-            <xsl:call-template name="BlockQuoteTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Video">
-            <xsl:call-template name="VideoTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Audio">
-            <xsl:call-template name="AudioTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:OrderedList">
-            <xsl:call-template name="OrderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:UnorderedList">
-            <xsl:call-template name="UnorderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Table">
-            <xsl:call-template name="TableTemplate"/>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
-    </li>
-  </xsl:template>
-
-  <xsl:template match="x:Header4">
-    <li>
-      <xsl:for-each select="current()/*">
-        <xsl:choose>
-          <xsl:when test="self::x:Header">
-            <xsl:call-template name="TextContentTemplate">
-              <xsl:with-param name="Tag" select="'h4'"/>           
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="self::x:Paragraph">
-            <xsl:call-template name="ParagraphTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Section">
-            <xsl:call-template name="Header5SectionTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:BlockQuote">
-            <xsl:call-template name="BlockQuoteTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Video">
-            <xsl:call-template name="VideoTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Audio">
-            <xsl:call-template name="AudioTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:OrderedList">
-            <xsl:call-template name="OrderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:UnorderedList">
-            <xsl:call-template name="UnorderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Table">
-            <xsl:call-template name="TableTemplate"/>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
-    </li>
-  </xsl:template>
-
-  <xsl:template match="x:Header5">
-    <li>
-      <xsl:for-each select="current()/*">
-        <xsl:choose>
-          <xsl:when test="self::x:Header">
-            <xsl:call-template name="TextContentTemplate">
-              <xsl:with-param name="Tag" select="'h5'"/>           
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="self::x:Paragraph">
-            <xsl:call-template name="ParagraphTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Section">
-            <xsl:call-template name="Header6SectionTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:BlockQuote">
-            <xsl:call-template name="BlockQuoteTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Video">
-            <xsl:call-template name="VideoTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Audio">
-            <xsl:call-template name="AudioTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:OrderedList">
-            <xsl:call-template name="OrderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:UnorderedList">
-            <xsl:call-template name="UnorderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Table">
-            <xsl:call-template name="TableTemplate"/>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
-    </li>
-  </xsl:template>
-  
-  <xsl:template match="x:Header6">
-    <li>
-      <xsl:for-each select="current()/*">
-        <xsl:choose>
-          <xsl:when test="self::x:Header">
-            <xsl:call-template name="TextContentTemplate">
-              <xsl:with-param name="Tag" select="'h6'"/>           
-            </xsl:call-template>
-          </xsl:when>
-          <xsl:when test="self::x:Paragraph">
-            <xsl:call-template name="ParagraphTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:BlockQuote">
-            <xsl:call-template name="BlockQuoteTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Video">
-            <xsl:call-template name="VideoTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Audio">
-            <xsl:call-template name="AudioTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:OrderedList">
-            <xsl:call-template name="OrderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:UnorderedList">
-            <xsl:call-template name="UnorderedListTemplate"/>
-          </xsl:when>
-          <xsl:when test="self::x:Table">
-            <xsl:call-template name="TableTemplate"/>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:for-each>
-    </li>
-  </xsl:template>
-
-  <xsl:template name="Header1SectionTemplate">
-    <ol>
-      <xsl:attribute name="class">
-        <xsl:text>header1-section</xsl:text>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="OrderedListStyleTypeTemplate">
-          <xsl:with-param name="ListStyle" select="@HeaderStyle"/>       
-        </xsl:call-template>
-      </xsl:attribute>
-      <xsl:apply-templates select="x:Header1"/>
-    </ol>
-  </xsl:template>
-
-  <xsl:template name="Header2SectionTemplate">
-    <ol>
-      <xsl:attribute name="class">
-        <xsl:text>header2-section</xsl:text>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="OrderedListStyleTypeTemplate">
-          <xsl:with-param name="ListStyle" select="@HeaderStyle"/>       
-        </xsl:call-template>
-      </xsl:attribute>
-      <xsl:apply-templates select="x:Header2"/>
-    </ol>
-  </xsl:template>
-
-  <xsl:template name="Header3SectionTemplate">
-    <ol>
-      <xsl:attribute name="class">
-        <xsl:text>header3-section</xsl:text>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="OrderedListStyleTypeTemplate">
-          <xsl:with-param name="ListStyle" select="@HeaderStyle"/>       
-        </xsl:call-template>
-      </xsl:attribute>
-      <xsl:apply-templates select="x:Header3"/>
-    </ol>
-  </xsl:template>
-
-  <xsl:template name="Header4SectionTemplate">
-    <ol>
-      <xsl:attribute name="class">
-        <xsl:text>header4-section</xsl:text>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="OrderedListStyleTypeTemplate">
-          <xsl:with-param name="ListStyle" select="@HeaderStyle"/>       
-        </xsl:call-template>
-      </xsl:attribute>
-      <xsl:apply-templates select="x:Header4"/>
-    </ol>
-  </xsl:template>
-
-  <xsl:template name="Header5SectionTemplate">
-    <ol>
-      <xsl:attribute name="class">
-        <xsl:text>header5-section</xsl:text>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="OrderedListStyleTypeTemplate">
-          <xsl:with-param name="ListStyle" select="@HeaderStyle"/>       
-        </xsl:call-template>
-      </xsl:attribute>
-      <xsl:apply-templates select="x:Header5"/>
-    </ol>
-  </xsl:template>
-
-  <xsl:template name="Header6SectionTemplate">
-    <ol>
-      <xsl:attribute name="class">
-        <xsl:text>header6-section</xsl:text>
-        <xsl:text> </xsl:text>
-        <xsl:call-template name="OrderedListStyleTypeTemplate">
-          <xsl:with-param name="ListStyle" select="@HeaderStyle"/>       
-        </xsl:call-template>
-      </xsl:attribute>
-      <xsl:apply-templates select="x:Header6"/>
-    </ol>
+  <xsl:template match="x:Title" mode="Section">
+    <xsl:call-template name="StyledTextTemplate"/>
   </xsl:template>
   
   <!--End Header-->
