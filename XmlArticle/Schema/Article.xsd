@@ -37,9 +37,9 @@
       <xs:field xpath="@Id"/>
     </xs:key>
   </xs:element>
-  
+
   <!--Element Definition-->
-  
+
   <!--Article Style Sheets-->
 
   <xs:complexType name="ArticleStyleSheetsType">
@@ -47,19 +47,19 @@
       <xs:element name="StyleSheet" type="ArticleStyleSheetType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
-  
+
   <xs:complexType name="ArticleStyleSheetType">
     <xs:attribute name="Source" type="ArticleStyleSheetSourceType" use="required"/>
   </xs:complexType>
 
   <!--End Article Style Sheets-->
-  
+
   <!--Article Style Definition-->
 
   <xs:complexType name="ArticleStyleDefinitionsType">
     <xs:sequence>
-      <xs:element name="TitleStyle" type="ArticleBasicTitleStyleType" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="SubtitleStyle" type="ArticleBasicTitleStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="TitleStyle" type="ArticleTitleStyleType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SubtitleStyle" type="ArticleSubtitleStyleType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Section1Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Section2Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Section3Style" type="SectionStyleType" minOccurs="0" maxOccurs="1"/>
@@ -69,59 +69,35 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="ArticleBasicTitleStyleType">
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="FontSize" type="FontSizeType"/>
-    <xs:attribute name="FontFamily" type="FontFamilyType"/>
-    <xs:attribute name="FontStretch" type="FontStretchType"/>
-    <xs:attribute name="FontStyle" type="FontStyleType"/>
-    <xs:attribute name="FontWeight" type="FontWeightType"/>
-    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
-    <xs:attribute name="LineHeight" type="LineHeightType"/>
+  <xs:complexType name="ArticleTitleStyleType">
+    <xs:attributeGroup ref="ArticleTitleAttributeGroup"/>
+  </xs:complexType>
+
+  <xs:complexType name="ArticleSubtitleStyleType">
+    <xs:attributeGroup ref="ArticleSubtitleAttributeGroup"/>
+  </xs:complexType>
+
+  <xs:complexType name="AuthorsStyleType">
+    <xs:attributeGroup ref="AuthorsAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="SectionStyleType">
-    <xs:attribute name="ListStyle" type="SectionListStyleType"/>
-    <xs:attribute name="FontSize" type="FontSizeType"/>
-    <xs:attribute name="FontFamily" type="FontFamilyType"/>
-    <xs:attribute name="FontStretch" type="FontStretchType"/>
-    <xs:attribute name="FontStyle" type="FontStyleType"/>
-    <xs:attribute name="FontWeight" type="FontWeightType"/>
-    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
-    <xs:attribute name="LineHeight" type="LineHeightType"/>
-    <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="BottomMargin" type="MarginType"/>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
-  
+
   <xs:complexType name="ParagraphStyle">
-    <xs:attribute name="Indent" type="xs:unsignedByte"/>
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="FontSize" type="FontSizeType"/>
-    <xs:attribute name="FontFamily" type="FontFamilyType"/>
-    <xs:attribute name="FontStretch" type="FontStretchType"/>
-    <xs:attribute name="FontStyle" type="FontStyleType"/>
-    <xs:attribute name="FontWeight" type="FontWeightType"/>
-    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
-    <xs:attribute name="LineHeight" type="LineHeightType"/>
-    <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="BottomMargin" type="MarginType"/>
+    <xs:attributeGroup ref="ParagraphAttributeGroup"/>
   </xs:complexType>
 
   <!--End Article Style Definition-->
-  
+
   <!--Title and Subtitle-->
-  
+
   <xs:complexType name="ArticleTitleType" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="StyledText" type="TextContentType"/>
       <xs:element name="LineBreak" type="LineBreakType"/>
-    </xs:choice>    
+    </xs:choice>
   </xs:complexType>
 
   <xs:complexType name="ArticleSubtitleType" mixed="true">
@@ -130,7 +106,7 @@
       <xs:element name="LineBreak" type="LineBreakType"/>
     </xs:choice>
   </xs:complexType>
- 
+
   <!--Abstract and Introduction-->
 
   <xs:complexType name="ArticleAbstractType">
@@ -168,7 +144,7 @@
   </xs:complexType>
 
   <!--End Abstract and Introduction-->
-  
+
   <!--Article Body-->
 
   <xs:complexType name="ArticleBodyType">
@@ -176,7 +152,7 @@
       <xs:sequence>
         <xs:element name="Section1" type="Section1Type" minOccurs="1" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">       
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
         <xs:element name="CodeBlock" type="CodeBlockType"/>
@@ -188,11 +164,11 @@
         <xs:element name="Table" type="TableType"/>
       </xs:choice>
     </xs:choice>
-    
+
   </xs:complexType>
-  
+
   <!--End Article Body-->
-  
+
   <!--Section Type-->
 
   <xs:complexType name="Section1Type">
@@ -213,8 +189,9 @@
           <xs:element name="UnorderedList" type="UnorderedListType"/>
           <xs:element name="Table" type="TableType"/>
         </xs:choice>
-      </xs:choice>      
+      </xs:choice>
     </xs:sequence>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="Section2Type">
@@ -237,6 +214,7 @@
         <xs:element name="Table" type="TableType"/>
       </xs:choice>
     </xs:sequence>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="Section3Type">
@@ -245,9 +223,9 @@
       <xs:choice>
         <xs:sequence>
           <xs:element name="Section4" type="Section4Type" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>       
+        </xs:sequence>
       </xs:choice>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">        
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
         <xs:element name="Paragraph" type="ParagraphType"/>
         <xs:element name="Image" type="ImageType"/>
         <xs:element name="CodeBlock" type="CodeBlockType"/>
@@ -259,6 +237,7 @@
         <xs:element name="Table" type="TableType"/>
       </xs:choice>
     </xs:sequence>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="Section4Type">
@@ -279,8 +258,9 @@
           <xs:element name="UnorderedList" type="UnorderedListType"/>
           <xs:element name="Table" type="TableType"/>
         </xs:choice>
-      </xs:choice>     
+      </xs:choice>
     </xs:sequence>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="Section5Type">
@@ -303,6 +283,7 @@
         </xs:choice>
       </xs:choice>
     </xs:sequence>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="Section6Type">
@@ -318,10 +299,11 @@
         <xs:element name="OrderedList" type="OrderedListType"/>
         <xs:element name="UnorderedList" type="UnorderedListType"/>
         <xs:element name="Table" type="TableType"/>
-      </xs:choice>      
+      </xs:choice>
     </xs:sequence>
+    <xs:attributeGroup ref="SectionAttributeGroup"/>
   </xs:complexType>
-  
+
   <!--End Header Type-->
 
   <!--Paragraph Type-->
@@ -335,28 +317,16 @@
       <xs:element name="Superscript" type="SuperscriptType"/>
       <xs:element name="Subscript" type="SubscriptType"/>
       <xs:element name="Quote" type="QuoteType"/>
-      <xs:element name="Cite" type="CiteType"/>      
-      <xs:element name="Hyperlink" type="HyperlinkType"/>      
+      <xs:element name="Cite" type="CiteType"/>
+      <xs:element name="Hyperlink" type="HyperlinkType"/>
       <xs:element name="LineBreak" type="LineBreakType"/>
       <xs:element name="Space" type="SpaceType"/>
     </xs:choice>
-    <xs:attribute name="Indent" type="xs:unsignedByte"/>
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="FontSize" type="FontSizeType"/>
-    <xs:attribute name="FontFamily" type="FontFamilyType"/>
-    <xs:attribute name="FontStretch" type="FontStretchType"/>
-    <xs:attribute name="FontStyle" type="FontStyleType"/>
-    <xs:attribute name="FontWeight" type="FontWeightType"/>
-    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
-    <xs:attribute name="LineHeight" type="LineHeightType"/>
-    <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="BottomMargin" type="MarginType"/>
+    <xs:attributeGroup ref="ParagraphAttributeGroup"/>
   </xs:complexType>
 
   <!--End Paragraph Tyle-->
-  
+
   <!--Author Type-->
 
   <xs:complexType name="AuthorsType">
@@ -411,15 +381,15 @@
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
-  
+
   <!--End List Type-->
 
   <!--Table Type-->
-  
+
   <!--Width对列是有用的，只要设置了某一列上的一个单元格就会整列适用-->
   <!--Height对tr是有用的-->
   <!--设置单元格内部只能用padding，而且只能一个个单元格设置，但是会影响到列宽和行高-->
-  
+
   <xs:complexType name="TableType">
     <xs:sequence>
       <xs:element name="Caption" type="TableCaptionType" minOccurs="0" maxOccurs="1"/>
@@ -499,9 +469,9 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  
+
   <!--End Table Type-->
-  
+
   <!--Reference and Cite Type-->
 
   <xs:complexType name="ReferencesType">
@@ -510,7 +480,7 @@
       <xs:element name="Reference" type="ReferenceType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
-    
+
   </xs:complexType>
 
   <xs:complexType name="ReferenceType">
@@ -531,11 +501,42 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  
-  <!--End References and Cite Type-->
 
-  <!--Base Element Type-->
+  <!--End References and Cite Type-->
   
+  <!--Other Block Element-->
+
+  <xs:complexType name="CodeBlockType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Language" type="CodeBlockLanguageType" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="BlockQuoteType">
+    <xs:sequence>
+      <xs:element name="Paragraph" type="ParagraphType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Source" type="xs:token"/>
+  </xs:complexType>
+
+  <xs:complexType name="ImageType">
+    <xs:attributeGroup ref="ImageAttributeGroup"/>
+  </xs:complexType>
+
+  <xs:complexType name="VideoType">
+    <xs:attributeGroup ref="VideoAttributeGroup"/>
+  </xs:complexType>
+
+  <xs:complexType name="AudioType">
+    <xs:attributeGroup ref="AudioAttributeGroup"/>
+  </xs:complexType>
+  
+  <!--End Other Block Element-->
+
+  <!--Other Inline Element Type-->
+
   <xs:complexType name="TextContentType">
     <xs:simpleContent>
       <xs:extension base="xs:token">
@@ -559,34 +560,8 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="ImageType">
-    <xs:attribute name="Source" type="xs:token"/>
-    <xs:attribute name="Description" type="xs:token"/>
-    <xs:attribute name="Width" type="WidthType"/>
-    <xs:attribute name="Height" type="HeightType"/>
-    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
-    <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="BottomMargin" type="MarginType"/>
-  </xs:complexType>
-
-  <xs:complexType name="VideoType">
-    <xs:attribute name="Source" type="xs:token"/>
-    <xs:attribute name="Description" type="xs:token"/>
-    <xs:attribute name="Width" type="WidthType"/>
-    <xs:attribute name="Height" type="HeightType"/>
-    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
-  </xs:complexType>
-  
-  <xs:complexType name="AudioType">
-    <xs:attribute name="Source" type="xs:token"/>
-    <xs:attribute name="Description" type="xs:token"/>
-    <xs:attribute name="Width" type="WidthType"/>
-    <xs:attribute name="Height" type="HeightType"/>
-    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
-  </xs:complexType>
-
   <xs:complexType name="LineBreakType"/>
-  
+
   <xs:complexType name="SpaceType"/>
 
   <xs:complexType name="DeletedTextType">
@@ -594,13 +569,13 @@
       <xs:restriction base="TextContentType"/>
     </xs:simpleContent>
   </xs:complexType>
-  
+
   <xs:complexType name="InsertedTextType">
     <xs:simpleContent>
       <xs:restriction base="TextContentType"/>
     </xs:simpleContent>
   </xs:complexType>
-  
+
   <xs:complexType name="MarkedTextType">
     <xs:simpleContent>
       <xs:restriction base="TextContentType"/>
@@ -628,22 +603,136 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="CodeBlockType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="Language" type="CodeBlockLanguageType" use="required"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
 
-  <xs:complexType name="BlockQuoteType">
-    <xs:sequence>
-      <xs:element name="Paragraph" type="ParagraphType" minOccurs="1" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="Source" type="xs:token"/>
-  </xs:complexType>
-  
   <!--End Base Element Type-->
+  
+  <!--Attribute Group Type-->
+
+  <xs:attributeGroup name="ArticleTitleAttributeGroup">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="ArticleSubtitleAttributeGroup">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="AuthorsAttributeGroup">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="SectionAttributeGroup">
+    <xs:attribute name="ListStyle" type="SectionListStyleType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="ParagraphAttributeGroup">
+    <xs:attribute name="Indent" type="xs:unsignedByte"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="ImageAttributeGroup">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="Description" type="xs:token"/>
+    <xs:attribute name="Width" type="WidthType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="VideoAttributeGroup">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="Description" type="xs:token"/>
+    <xs:attribute name="Width" type="WidthType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="AudioAttributeGroup">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="Description" type="xs:token"/>
+    <xs:attribute name="Width" type="WidthType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+  
+  
+  
+  <!--End Attribute Group Type-->
 
   <!--Attribute Type-->
 
@@ -710,7 +799,7 @@
       <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
   <xs:simpleType name="HeightType">
     <xs:restriction base="xs:token">
       <xs:pattern value="^(auto|[0-9]*\.?[0-9]*(%|px|pt|pc|em|ex|cm|mm|in|rem|ch))$"/>
@@ -773,7 +862,7 @@
       <xs:enumeration value="BracketedDecimal"/>
       <xs:enumeration value="ChineseBracketedDecimal"/>
       <xs:enumeration value="BracketedLowerAlpha"/>
-      <xs:enumeration value="BracketedUpperAlpha"/>      
+      <xs:enumeration value="BracketedUpperAlpha"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -828,7 +917,7 @@
       <xs:enumeration value="Stretch"/>
     </xs:restriction>
   </xs:simpleType>
-  
+
   <xs:simpleType name="VerticalAlignmentType">
     <xs:restriction base="xs:token">
       <xs:enumeration value="Top"/>

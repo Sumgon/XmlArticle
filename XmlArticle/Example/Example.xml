@@ -5,9 +5,9 @@
   </Title>
   <Body>
     <Section1>
-      <Title>1</Title>
+      <Heading>1</Heading>
       <Paragraph>11</Paragraph>
-      <Paragraph>22</Paragraph>
+      <Paragraph >22</Paragraph>
       <Video Source="11"/>
       
     </Section1>
