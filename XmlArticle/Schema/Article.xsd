@@ -354,15 +354,14 @@
     <xs:sequence>
       <xs:element name="Item" type="ListItemType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
-    <xs:attribute name="CounterFontWeight" type="FontWeightType"/>
+    <xs:attributeGroup ref="OrderedListAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="UnorderedListType">
     <xs:sequence>
       <xs:element name="Item" type="ListItemType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="ListStyle" type="UnorderedListStyleType"/>
+    <xs:attributeGroup ref="UnorderedListAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="ListItemType">
@@ -397,12 +396,7 @@
       <xs:element name="Header" type="TableHeaderType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Body" type="TableBodyType" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
-    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
-    <xs:attribute name="RowHeight" type="HeightType"/>
-    <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="BottomMargin" type="MarginType"/>
-    <xs:attribute name="LeftMargin" type="MarginType"/>
-    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attributeGroup ref="TableAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="TableColumnStylesType">
@@ -412,31 +406,29 @@
   </xs:complexType>
 
   <xs:complexType name="TableColumnStyleType">
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attributeGroup ref="TableColumnAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="TableHeaderType">
     <xs:sequence>
       <xs:element name="HeaderCell" type="TableHeaderCellType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attributeGroup ref="TableHeaderAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="TableBodyType">
     <xs:sequence>
       <xs:element name="Row" type="TableRowType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute name="RowHeight" type="HeightType"/>
   </xs:complexType>
 
   <xs:complexType name="TableRowType">
     <xs:choice minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="HeaderCell" type="TableHeaderCellType"/>
-      <xs:element name="DataCell" type="TableDataCellType"/>
+      <xs:element name="HeaderCell" type="TableBodyHeaderCellType"/>
+      <xs:element name="DataCell" type="TableBodyDataCellType"/>
     </xs:choice>
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attributeGroup ref="TableRowAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="TableHeaderCellType" mixed="true">
@@ -444,24 +436,25 @@
       <xs:element name="StyledText" type="TextContentType"/>
       <xs:element name="Hyperlink" type="HyperlinkType"/>
     </xs:choice>
-    <xs:attribute name="ColumnSpan" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="RowSpan" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attributeGroup ref="TableHeaderCellAttributeGroup"/>
   </xs:complexType>
 
-  <xs:complexType name="TableDataCellType" mixed="true">
+  <xs:complexType name="TableBodyHeaderCellType" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="StyledText" type="TextContentType"/>
       <xs:element name="Hyperlink" type="HyperlinkType"/>
-      <xs:element name="Image" type="ImageType"/>
     </xs:choice>
-    <xs:attribute name="ColumnSpan" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="RowSpan" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attributeGroup ref="TableBodyCellAttributeGroup"/>
   </xs:complexType>
 
+  <xs:complexType name="TableBodyDataCellType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="StyledText" type="TextContentType"/>
+      <xs:element name="Hyperlink" type="HyperlinkType"/>
+    </xs:choice>
+    <xs:attributeGroup ref="TableBodyCellAttributeGroup"/>
+  </xs:complexType>
+  
   <xs:complexType name="TableCaptionType">
     <xs:simpleContent>
       <xs:extension base="TextContentType">
@@ -479,8 +472,7 @@
       <xs:element name="Heading" type="TextContentType" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Reference" type="ReferenceType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
-
+    <xs:attributeGroup ref="ReferencesAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="ReferenceType">
@@ -509,7 +501,7 @@
   <xs:complexType name="CodeBlockType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="Language" type="CodeBlockLanguageType" use="required"/>
+        <xs:attributeGroup ref="CodeBlockAttributeGroup"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -518,7 +510,7 @@
     <xs:sequence>
       <xs:element name="Paragraph" type="ParagraphType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attributeGroup ref="BlockQuoteAttributeGroup"/>
   </xs:complexType>
 
   <xs:complexType name="ImageType">
@@ -607,6 +599,8 @@
   <!--End Base Element Type-->
   
   <!--Attribute Group Type-->
+  
+  <!--因为html居中需要用margin-left/margin-left:auto和width:50%，所以左右margin无法使用（默认的margin会远比设置的大），需要使用width:number%来进行左右对称margin-->
 
   <xs:attributeGroup name="ArticleTitleAttributeGroup">
     <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
@@ -700,9 +694,7 @@
     <xs:attribute name="Width" type="WidthType"/>
     <xs:attribute name="Height" type="HeightType"/>
     <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
-    <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="RightMargin" type="MarginType"/>
     <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:attributeGroup>
 
@@ -712,9 +704,7 @@
     <xs:attribute name="Width" type="WidthType"/>
     <xs:attribute name="Height" type="HeightType"/>
     <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
-    <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
-    <xs:attribute name="RightMargin" type="MarginType"/>
     <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:attributeGroup>
 
@@ -724,13 +714,147 @@
     <xs:attribute name="Width" type="WidthType"/>
     <xs:attribute name="Height" type="HeightType"/>
     <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="TableAttributeGroup">
+    <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="TableColumnAttributeGroup">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="Width" type="WidthType"/>
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="TableHeaderAttributeGroup">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="TableRowAttributeGroup">
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="TableHeaderCellAttributeGroup">
+    <xs:attribute name="ColumnSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftPadding" type="PaddingType"/>
+    <xs:attribute name="TopPadding" type="PaddingType"/>
+    <xs:attribute name="RightPadding" type="PaddingType"/>
+    <xs:attribute name="BottomPadding" type="PaddingType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="Width" type="WidthType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="TableBodyCellAttributeGroup">
+    <xs:attribute name="ColumnSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="RowSpan" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="TextAlignment" type="TextAlignmentType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftPadding" type="PaddingType"/>
+    <xs:attribute name="TopPadding" type="PaddingType"/>
+    <xs:attribute name="RightPadding" type="PaddingType"/>
+    <xs:attribute name="BottomPadding" type="PaddingType"/>
+    <xs:attribute name="Height" type="HeightType"/>
+    <xs:attribute name="Width" type="WidthType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="BlockQuoteAttributeGroup">
+    <xs:attribute name="Source" type="xs:token"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="CodeBlockAttributeGroup">
+    <xs:attribute name="Language" type="CodeBlockLanguageType" use="required"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="ReferencesAttributeGroup">
+    <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="OrderedListAttributeGroup">
+    <xs:attribute name="ListStyle" type="OrderedListStyleType"/>
+    <xs:attribute name="FontSize" type="FontSizeType"/>
+    <xs:attribute name="FontFamily" type="FontFamilyType"/>
+    <xs:attribute name="FontStretch" type="FontStretchType"/>
+    <xs:attribute name="FontStyle" type="FontStyleType"/>
+    <xs:attribute name="FontWeight" type="FontWeightType"/>
+    <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
+    <xs:attribute name="FontColor" type="ColorType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
     <xs:attribute name="RightMargin" type="MarginType"/>
     <xs:attribute name="BottomMargin" type="MarginType"/>
   </xs:attributeGroup>
   
-  
+  <xs:attributeGroup name="UnorderedListAttributeGroup">
+    <xs:attribute name="ListStyle" type="UnorderedListStyleType"/>
+    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="LineHeight" type="LineHeightType"/>
+    <xs:attribute name="LeftMargin" type="MarginType"/>
+    <xs:attribute name="TopMargin" type="MarginType"/>
+    <xs:attribute name="RightMargin" type="MarginType"/>
+    <xs:attribute name="BottomMargin" type="MarginType"/>
+  </xs:attributeGroup>
   
   <!--End Attribute Group Type-->
 

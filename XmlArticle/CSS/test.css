@@ -63,3 +63,23 @@ h6::before {
     counter-increment: section6;
     content: counter(section1) "." counter(section2) "." counter(section3) "." counter(section4) "." counter(section5) "." counter(section6) " ";
 }
+
+#horizontal-style {
+    display: table;
+    width: 100%
+}
+
+#horizontal-style li {
+    display: table-cell;
+}
+#horizontal-style a {
+    display: block;
+    border: 1px solid red;
+    text-align: center;
+    margin: 0 5px;
+    background: #999
+}
+
+div {
+    background: #ccc
+}
