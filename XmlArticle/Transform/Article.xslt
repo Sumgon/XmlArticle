@@ -31,6 +31,17 @@
             <xsl:value-of select="'stylesheet'"/>        
           </xsl:attribute>
           <xsl:attribute name="href">
+            <xsl:value-of select="'D:\OneDrive\Resources\Xml\XmlArticle\XmlArticle\CSS\section.css'"/>        
+          </xsl:attribute>
+        </link>
+        <link>
+          <xsl:attribute name="type">
+            <xsl:value-of select="'text/css'"/>        
+          </xsl:attribute>
+          <xsl:attribute name="rel">
+            <xsl:value-of select="'stylesheet'"/>        
+          </xsl:attribute>
+          <xsl:attribute name="href">
             <xsl:value-of select="'D:\OneDrive\Resources\Xml\XmlArticle\XmlArticle\CSS\prism.css'"/>        
           </xsl:attribute>
         </link>
@@ -318,52 +329,7 @@
   
   <!--Header-->
   <xsl:template match="x:Section1">
-    <xsl:variable name="ParsedFontSize">
-        <xsl:call-template name="FontSizeTemplate">
-          <xsl:with-param name="FontSize" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontSize"/>
-        </xsl:call-template>
-      </xsl:variable>
-    <xsl:variable name="ParsedFontFamily">
-      <xsl:call-template name="FontFamilyTemplate">
-        <xsl:with-param name="FontFamily" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontFamily"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="ParsedFontStretch">
-      <xsl:call-template name="FontStretchTemplate">
-        <xsl:with-param name="FontStretch" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontStretch"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="ParsedFontStyle">
-      <xsl:call-template name="FontStyleTemplate">
-        <xsl:with-param name="FontStyle" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontStyle"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="ParsedFontWeight">
-      <xsl:call-template name="FontWeightTypeTemplate">
-        <xsl:with-param name="FontWeight" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontWeight"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="ParsedFontColor">
-      <xsl:call-template name="FontColorTemplate">
-        <xsl:with-param name="FontColor" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontColor"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="ParsedBackgroundColor">
-      <xsl:call-template name="BackgroundColorTemplate">
-        <xsl:with-param name="BackgroundColor" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@BackgroundColor"/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="ParsedLineHeight">
-      <xsl:call-template name="LineHeightTemplate">
-        <xsl:with-param name="LineHeight" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@LineHeight"/>
-      </xsl:call-template>
-    </xsl:variable>
-
-      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedFontColor!='' or $ParsedBackgroundColor!='' or $ParsedLineHeight!=''">
-        <xsl:attribute name="style">
-          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedFontColor,$ParsedBackgroundColor,$ParsedLineHeight)"/>
-        </xsl:attribute>
-      </xsl:if>
+    
   </xsl:template>
   
   <xsl:template match="x:Section1">
@@ -397,9 +363,56 @@
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section1">
-    <xsl:call-template name="TextContentTypeTemplate">
-      <xsl:with-param name="Tag" select="'h1'"/>
-    </xsl:call-template>  
+    <h1>
+      <xsl:variable name="ParsedFontSize">
+        <xsl:call-template name="FontSizeTemplate">
+          <xsl:with-param name="FontSize" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontSize"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontFamily">
+        <xsl:call-template name="FontFamilyTemplate">
+          <xsl:with-param name="FontFamily" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontFamily"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontStretch">
+        <xsl:call-template name="FontStretchTemplate">
+          <xsl:with-param name="FontStretch" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontStretch"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontStyle">
+        <xsl:call-template name="FontStyleTemplate">
+          <xsl:with-param name="FontStyle" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontStyle"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontWeight">
+        <xsl:call-template name="FontWeightTypeTemplate">
+          <xsl:with-param name="FontWeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontWeight"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontColor">
+        <xsl:call-template name="FontColorTemplate">
+          <xsl:with-param name="FontColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontColor"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedBackgroundColor">
+        <xsl:call-template name="BackgroundColorTemplate">
+          <xsl:with-param name="BackgroundColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@BackgroundColor"/>
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="ParsedLineHeight">
+        <xsl:call-template name="LineHeightTemplate">
+          <xsl:with-param name="LineHeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@LineHeight"/>
+        </xsl:call-template>
+      </xsl:variable>
+      
+
+      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedFontColor!='' or $ParsedBackgroundColor!='' or $ParsedLineHeight!=''">
+        <xsl:attribute name="style">
+          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedFontColor,$ParsedBackgroundColor,$ParsedLineHeight)"/>
+        </xsl:attribute>
+      </xsl:if>
+      <xsl:call-template name="StyledTextTemplate"/>   
+    </h1>
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section2">
