@@ -4,6 +4,8 @@
     margin: auto;
 } */
 
+<!-- /*--><root><![CDATA[<!--*/ -->
+
 /* 取消默认margin*/
 blockquote,body,dd,dl,fieldset,figure,form,h1,h2,h3,h4,h5,h6,hr,menu,ol,p,pre,ul,video,audio{
     margin:0;
@@ -366,3 +368,5 @@ q.quote-none::after{
 }
 
 /*end q element style*/
+
+<!-- /*-->]]></root><!--*/ --> 
