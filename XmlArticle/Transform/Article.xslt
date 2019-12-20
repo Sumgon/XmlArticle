@@ -122,14 +122,14 @@
           <xsl:with-param name="FontWeight" select="preceding-sibling::x:StyleDefinitions/x:TitleStyle/@FontWeight"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="ParsedFontColor">
-        <xsl:call-template name="FontColorTemplate">
-          <xsl:with-param name="FontColor" select="preceding-sibling::x:StyleDefinitions/x:TitleStyle/@FontColor"/>
+      <xsl:variable name="ParsedForeground">
+        <xsl:call-template name="ForegroundTemplate">
+          <xsl:with-param name="Foreground" select="preceding-sibling::x:StyleDefinitions/x:TitleStyle/@Foreground"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="ParsedBackgroundColor">
-        <xsl:call-template name="BackgroundColorTemplate">
-          <xsl:with-param name="BackgroundColor" select="preceding-sibling::x:StyleDefinitions/x:TitleStyle/@BackgroundColor"/>
+      <xsl:variable name="ParsedBackground">
+        <xsl:call-template name="BackgroundTemplate">
+          <xsl:with-param name="Background" select="preceding-sibling::x:StyleDefinitions/x:TitleStyle/@Background"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedLineHeight">
@@ -138,9 +138,9 @@
         </xsl:call-template>
       </xsl:variable>
       
-      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedFontColor!='' or $ParsedBackgroundColor!='' or $ParsedLineHeight!=''">
+      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedForeground!='' or $ParsedBackground!='' or $ParsedLineHeight!=''">
         <xsl:attribute name="style">
-          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedFontColor,$ParsedBackgroundColor,$ParsedLineHeight)"/>
+          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedForeground,$ParsedBackground,$ParsedLineHeight)"/>
         </xsl:attribute>     
       </xsl:if>
       <xsl:apply-templates select="text()|x:StyledText|x:LineBreak"/>
@@ -181,14 +181,14 @@
           <xsl:with-param name="FontWeight" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontWeight"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="ParsedFontColor">
-        <xsl:call-template name="FontColorTemplate">
-          <xsl:with-param name="FontColor" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontColor"/>
+      <xsl:variable name="ParsedForeground">
+        <xsl:call-template name="ForegroundTemplate">
+          <xsl:with-param name="Foreground" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@Foreground"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="ParsedBackgroundColor">
-        <xsl:call-template name="BackgroundColorTemplate">
-          <xsl:with-param name="BackgroundColor" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@BackgroundColor"/>
+      <xsl:variable name="ParsedBackground">
+        <xsl:call-template name="BackgroundTemplate">
+          <xsl:with-param name="Background" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@Background"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedLineHeight">
@@ -197,9 +197,9 @@
         </xsl:call-template>
       </xsl:variable>
 
-      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedFontColor!='' or $ParsedBackgroundColor!='' or $ParsedLineHeight!=''">
+      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedForeground!='' or $ParsedBackground!='' or $ParsedLineHeight!=''">
         <xsl:attribute name="style">
-          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedFontColor,$ParsedBackgroundColor,$ParsedLineHeight)"/>
+          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedForeground,$ParsedBackground,$ParsedLineHeight)"/>
         </xsl:attribute>
       </xsl:if>
       
@@ -404,14 +404,14 @@
           <xsl:with-param name="FontWeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontWeight"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="ParsedFontColor">
-        <xsl:call-template name="FontColorTemplate">
-          <xsl:with-param name="FontColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontColor"/>
+      <xsl:variable name="ParsedForeground">
+        <xsl:call-template name="ForegroundTemplate">
+          <xsl:with-param name="Foreground" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@Foreground"/>
         </xsl:call-template>
       </xsl:variable>
-      <xsl:variable name="ParsedBackgroundColor">
-        <xsl:call-template name="BackgroundColorTemplate">
-          <xsl:with-param name="BackgroundColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@BackgroundColor"/>
+      <xsl:variable name="ParsedBackground">
+        <xsl:call-template name="BackgroundTemplate">
+          <xsl:with-param name="Background" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@Background"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedLineHeight">
@@ -420,9 +420,9 @@
         </xsl:call-template>
       </xsl:variable>
       
-      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedFontColor!='' or $ParsedBackgroundColor!='' or $ParsedLineHeight!=''">
+      <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedForeground!='' or $ParsedBackground!='' or $ParsedLineHeight!=''">
         <xsl:attribute name="style">
-          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedFontColor,$ParsedBackgroundColor,$ParsedLineHeight)"/>
+          <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedForeground,$ParsedBackground,$ParsedLineHeight)"/>
         </xsl:attribute>
       </xsl:if>
       <xsl:call-template name="StyledTextTemplate"/>   
@@ -471,10 +471,10 @@
     <xsl:param name="FontStyleGlobal"/>
     <xsl:param name="FontWeightLocal"/>
     <xsl:param name="FontWeightGlobal"/>
-    <xsl:param name="FontColorLocal"/>
-    <xsl:param name="FontColorGlobal"/>
-    <xsl:param name="BackgroundColorLocal"/>
-    <xsl:param name="BackgroundColorGlobal"/>
+    <xsl:param name="ForegroundLocal"/>
+    <xsl:param name="ForegroundGlobal"/>
+    <xsl:param name="BackgroundLocal"/>
+    <xsl:param name="BackgroundGlobal"/>
     <xsl:param name="LineHeightLocal"/>
     <xsl:param name="LineHeightGlobal"/>
 
@@ -564,16 +564,16 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <xsl:variable name="ParsedFontColor">
+      <xsl:variable name="ParsedForeground">
         <xsl:choose>
-          <xsl:when test="$FontColorLocal!=''">
-            <xsl:call-template name="FontColorTemplate">
-              <xsl:with-param name="FontColor" select="$FontColorLocal"/>
+          <xsl:when test="$ForegroundLocal!=''">
+            <xsl:call-template name="ForegroundTemplate">
+              <xsl:with-param name="Foreground" select="$ForegroundLocal"/>
             </xsl:call-template>
           </xsl:when>
-          <xsl:when test="$FontColorGlobal!=''">
-            <xsl:call-template name="FontColorTemplate">
-              <xsl:with-param name="FontColor" select="$FontColorGlobal"/>
+          <xsl:when test="$ForegroundGlobal!=''">
+            <xsl:call-template name="ForegroundTemplate">
+              <xsl:with-param name="Foreground" select="$ForegroundGlobal"/>
             </xsl:call-template>
           </xsl:when>
           <xsl:otherwise>
@@ -581,16 +581,16 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <xsl:variable name="ParsedBackgroundColor">
+      <xsl:variable name="ParsedBackground">
         <xsl:choose>
-          <xsl:when test="$BackgroundColorLocal!=''">
-            <xsl:call-template name="BackgroundColorTemplate">
-              <xsl:with-param name="BackgroundColor" select="$BackgroundColorLocal"/>
+          <xsl:when test="$BackgroundLocal!=''">
+            <xsl:call-template name="BackgroundTemplate">
+              <xsl:with-param name="Background" select="$BackgroundLocal"/>
             </xsl:call-template>
           </xsl:when>
-          <xsl:when test="$BackgroundColorGlobal!=''">
-            <xsl:call-template name="BackgroundColorTemplate">
-              <xsl:with-param name="BackgroundColor" select="$BackgroundColorGlobal"/>
+          <xsl:when test="$BackgroundGlobal!=''">
+            <xsl:call-template name="BackgroundTemplate">
+              <xsl:with-param name="Background" select="$BackgroundGlobal"/>
             </xsl:call-template>
           </xsl:when>
           <xsl:otherwise>
@@ -669,7 +669,7 @@
 
   <xsl:template match="x:HeaderCell" mode="TableHeader">
     <xsl:variable name="TextAlignmentRow" select="../@TextAlignment"/>
-    <xsl:variable name="BackgroundColorRow" select="../@BackgroundColor"/>
+    <xsl:variable name="BackgroundRow" select="../@Background"/>
 
     <xsl:variable name="TextAlignment">
       <xsl:choose>
@@ -684,13 +684,13 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="BackgroundColor">
+    <xsl:variable name="Background">
       <xsl:choose>
-        <xsl:when test="@BackgroundColor">
-          <xsl:value-of select="@BackgroundColor"/>
+        <xsl:when test="@Background">
+          <xsl:value-of select="@Background"/>
         </xsl:when>
-        <xsl:when test="$BackgroundColorRow">
-          <xsl:value-of select="$BackgroundColorRow"/>
+        <xsl:when test="$BackgroundRow">
+          <xsl:value-of select="$BackgroundRow"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
@@ -707,13 +707,13 @@
         </xsl:attribute>
       </xsl:if>
 
-      <xsl:if test="$TextAlignment!='' or $BackgroundColor!=''">
+      <xsl:if test="$TextAlignment!='' or $Background!=''">
         <xsl:attribute name="style">
           <xsl:call-template name="TextAlignmentTemplate">
             <xsl:with-param name="TextAlignment" select="$TextAlignment"/>
           </xsl:call-template>
-          <xsl:call-template name="BackgroundColorTemplate">
-            <xsl:with-param name="BackgroundColor" select="$BackgroundColor"/>
+          <xsl:call-template name="BackgroundTemplate">
+            <xsl:with-param name="Background" select="$Background"/>
           </xsl:call-template>
         </xsl:attribute>
       </xsl:if>
@@ -724,9 +724,9 @@
   <xsl:template match="x:HeaderCell" mode="TableBody">
     <xsl:variable name="Position" select="position()"/>
     <xsl:variable name="TextAlignmentColumn" select="ancestor::x:Table/x:ColumnStyles/x:ColumnStyle[$Position]/@TextAlignment"/>
-    <xsl:variable name="BackgroundColorColumn" select="ancestor::x:Table/x:ColumnStyles/x:ColumnStyle[$Position]/@BackgroundColor"/>
+    <xsl:variable name="BackgroundColumn" select="ancestor::x:Table/x:ColumnStyles/x:ColumnStyle[$Position]/@Background"/>
     <xsl:variable name="TextAlignmentRow" select="../@TextAlignment"/>
-    <xsl:variable name="BackgroundColorRow" select="../@BackgroundColor"/>
+    <xsl:variable name="BackgroundRow" select="../@Background"/>
 
     <xsl:if test="@RowSpan">
       <xsl:attribute name="rowspan">
@@ -756,27 +756,27 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="BackgroundColor">
+    <xsl:variable name="Background">
       <xsl:choose>
-        <xsl:when test="@BackgroundColor">
-          <xsl:value-of select="@BackgroundColor"/>
+        <xsl:when test="@Background">
+          <xsl:value-of select="@Background"/>
         </xsl:when>
-        <xsl:when test="$BackgroundColorRow">
-          <xsl:value-of select="$BackgroundColorRow"/>
+        <xsl:when test="$BackgroundRow">
+          <xsl:value-of select="$BackgroundRow"/>
         </xsl:when>
-        <xsl:when test="$BackgroundColorColumn">
-          <xsl:value-of select="$BackgroundColorColumn"/>
+        <xsl:when test="$BackgroundColumn">
+          <xsl:value-of select="$BackgroundColumn"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
     <th>
-      <xsl:if test="$TextAlignment!='' or $BackgroundColor!=''">
+      <xsl:if test="$TextAlignment!='' or $Background!=''">
         <xsl:attribute name="style">
           <xsl:call-template name="TextAlignmentTemplate">
             <xsl:with-param name="TextAlignment" select="$TextAlignment"/>
           </xsl:call-template>
-          <xsl:call-template name="BackgroundColorTemplate">
-            <xsl:with-param name="BackgroundColor" select="$BackgroundColor"/>
+          <xsl:call-template name="BackgroundTemplate">
+            <xsl:with-param name="Background" select="$Background"/>
           </xsl:call-template>
         </xsl:attribute>
       </xsl:if>
@@ -788,9 +788,9 @@
     <!--必须先要缓存当前Context下的Position，否则如果直接应用在[]的话就会切换到ColumnStyle的Context下的position(默认是1)-->
     <xsl:variable name="Position" select="position()"/>
     <xsl:variable name="TextAlignmentColumn" select="ancestor::x:Table/x:ColumnStyles/x:ColumnStyle[$Position]/@TextAlignment"/>
-    <xsl:variable name="BackgroundColorColumn" select="ancestor::x:Table/x:ColumnStyles/x:ColumnStyle[$Position]/@BackgroundColor"/>
+    <xsl:variable name="BackgroundColumn" select="ancestor::x:Table/x:ColumnStyles/x:ColumnStyle[$Position]/@Background"/>
     <xsl:variable name="TextAlignmentRow" select="../@TextAlignment"/>
-    <xsl:variable name="BackgroundColorRow" select="../@BackgroundColor"/>
+    <xsl:variable name="BackgroundRow" select="../@Background"/>
 
     <xsl:variable name="TextAlignment">
       <xsl:choose>
@@ -809,29 +809,29 @@
       </xsl:choose>
     </xsl:variable>
     
-    <xsl:variable name="BackgroundColor">
+    <xsl:variable name="Background">
       <xsl:choose>
-        <xsl:when test="@BackgroundColor">
-          <xsl:value-of select="@BackgroundColor"/>
+        <xsl:when test="@Background">
+          <xsl:value-of select="@Background"/>
         </xsl:when>
-        <xsl:when test="$BackgroundColorRow">
-          <xsl:value-of select="$BackgroundColorRow"/>
+        <xsl:when test="$BackgroundRow">
+          <xsl:value-of select="$BackgroundRow"/>
         </xsl:when>
-        <xsl:when test="$BackgroundColorColumn">
-          <xsl:value-of select="$BackgroundColorColumn"/>
+        <xsl:when test="$BackgroundColumn">
+          <xsl:value-of select="$BackgroundColumn"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
     
     <!--优先单元格属性、然后行、最后列-->
     <td>
-      <xsl:if test="$TextAlignment!='' or $BackgroundColor!=''">
+      <xsl:if test="$TextAlignment!='' or $Background!=''">
         <xsl:attribute name="style">
           <xsl:call-template name="TextAlignmentTemplate">
             <xsl:with-param name="TextAlignment" select="$TextAlignment"/>
           </xsl:call-template>
-          <xsl:call-template name="BackgroundColorTemplate">
-            <xsl:with-param name="BackgroundColor" select="$BackgroundColor"/>
+          <xsl:call-template name="BackgroundTemplate">
+            <xsl:with-param name="Background" select="$Background"/>
           </xsl:call-template>
         </xsl:attribute>
       </xsl:if>
@@ -946,7 +946,7 @@
   
   <xsl:template name="ParagraphTemplate" match="x:Paragraph">
     <p>
-      <xsl:if test="@Indent or @TextAlignment or @FontSize or @FontFamily or @FontStretch or @FontStyle or @FontWeight or @FontColor or @BackgroundColor or @LineHeight">
+      <xsl:if test="@Indent or @TextAlignment or @FontSize or @FontFamily or @FontStretch or @FontStyle or @FontWeight or @Foreground or @Background or @LineHeight">
         <xsl:attribute name="style">
           <xsl:if test="@Indent">
             <xsl:text>text-indent:</xsl:text>
@@ -971,11 +971,11 @@
           <xsl:call-template name="FontWeightTemplate">
             <xsl:with-param name="FontWeight" select="@FontWeight"/>       
           </xsl:call-template>
-          <xsl:call-template name="FontColorTemplate">
-            <xsl:with-param name="FontColor" select="@FontColor"/>
+          <xsl:call-template name="ForegroundTemplate">
+            <xsl:with-param name="Foreground" select="@Foreground"/>
           </xsl:call-template>
-          <xsl:call-template name="BackgroundColorTemplate">
-            <xsl:with-param name="BackgroundColor" select="@BackgroundColor"/>
+          <xsl:call-template name="BackgroundTemplate">
+            <xsl:with-param name="Background" select="@Background"/>
           </xsl:call-template>
           <xsl:call-template name="LineHeightTemplate">
             <xsl:with-param name="LineHeight" select="@LineHeight"/>          
@@ -1307,7 +1307,7 @@
           </xsl:call-template>
         </xsl:attribute>     
       </xsl:if>     
-      <xsl:if test="@FontSize or @FontFamily or @FontStretch or @FontStyle or @FontWeight or @FontColor or @BackgroundColor">
+      <xsl:if test="@FontSize or @FontFamily or @FontStretch or @FontStyle or @FontWeight or @Foreground or @Background">
         <xsl:attribute name="style">        
           <xsl:call-template name="FontSizeTemplate">
             <xsl:with-param name="FontSize" select="@FontSize"/>       
@@ -1324,11 +1324,11 @@
           <xsl:call-template name="FontWeightTemplate">
             <xsl:with-param name="FontWeight" select="@FontWeight"/>       
           </xsl:call-template>
-          <xsl:call-template name="FontColorTemplate">
-            <xsl:with-param name="FontColor" select="@FontColor"/>
+          <xsl:call-template name="ForegroundTemplate">
+            <xsl:with-param name="Foreground" select="@Foreground"/>
           </xsl:call-template>
-          <xsl:call-template name="BackgroundColorTemplate">
-            <xsl:with-param name="BackgroundColor" select="@BackgroundColor"/>
+          <xsl:call-template name="BackgroundTemplate">
+            <xsl:with-param name="Background" select="@Background"/>
           </xsl:call-template>
         </xsl:attribute>     
       </xsl:if>
@@ -1390,8 +1390,8 @@
     <xsl:param name="FontStretch"/>
     <xsl:param name="FontStyle"/>
     <xsl:param name="FontWeight"/>
-    <xsl:param name="FontColor"/>
-    <xsl:param name="BackgroundColor"/>
+    <xsl:param name="Foreground"/>
+    <xsl:param name="Background"/>
     <xsl:param name="LineHeight"/>
     <xsl:param name="TopMargin"/>
     <xsl:param name="BottomMargin"/>
@@ -1414,11 +1414,11 @@
       <xsl:call-template name="FontWeightTemplate">
         <xsl:with-param name="FontWeight" select="$FontWeight"/>
       </xsl:call-template>
-      <xsl:call-template name="FontColorTemplate">
-        <xsl:with-param name="FontColor" select="$FontColor"/>
+      <xsl:call-template name="ForegroundTemplate">
+        <xsl:with-param name="Foreground" select="$Foreground"/>
       </xsl:call-template>
-      <xsl:call-template name="BackgroundColorTemplate">
-        <xsl:with-param name="BackgroundColor" select="$BackgroundColor"/>
+      <xsl:call-template name="BackgroundTemplate">
+        <xsl:with-param name="Background" select="$Background"/>
       </xsl:call-template>
       <xsl:call-template name="LineHeightTemplate">
         <xsl:with-param name="LineHeight" select="$LineHeight"/>
@@ -1515,11 +1515,11 @@
     </xsl:choose>  
   </xsl:template>
 
-  <xsl:template name="FontColorTemplate">
-    <xsl:param name="FontColor"/>
+  <xsl:template name="ForegroundTemplate">
+    <xsl:param name="Foreground"/>
     <xsl:choose>
-      <xsl:when test="$FontColor and $FontColor!=''">
-        <xsl:value-of select="concat('color:',translate($FontColor,$uppercase,$lowercase),';')"/>
+      <xsl:when test="$Foreground and $Foreground!=''">
+        <xsl:value-of select="concat('color:',translate($Foreground,$uppercase,$lowercase),';')"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:text/>
@@ -1527,11 +1527,11 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template name="BackgroundColorTemplate">
-    <xsl:param name="BackgroundColor"/>
+  <xsl:template name="BackgroundTemplate">
+    <xsl:param name="Background"/>
     <xsl:choose>
-      <xsl:when test="$BackgroundColor and $BackgroundColor!=''">
-        <xsl:value-of select="concat('background-color:',translate($BackgroundColor,$uppercase,$lowercase),';')"/>
+      <xsl:when test="$Background and $Background!=''">
+        <xsl:value-of select="concat('background-color:',translate($Background,$uppercase,$lowercase),';')"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:text/>

@@ -635,8 +635,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -653,8 +653,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -670,8 +670,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -687,8 +687,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -702,8 +702,8 @@
     <xs:attribute name="FontSize" type="FontSizeType"/>
     <xs:attribute name="FontFamily" type="FontFamilyType"/>
     <xs:attribute name="FontStretch" type="FontStretchType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -766,8 +766,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="Width" type="WidthType"/>
   </xs:attributeGroup>
@@ -780,8 +780,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="Height" type="HeightType"/>
   </xs:attributeGroup>
@@ -794,8 +794,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="Height" type="HeightType"/>
   </xs:attributeGroup>
@@ -809,8 +809,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftPadding" type="PaddingType"/>
     <xs:attribute name="TopPadding" type="PaddingType"/>
@@ -830,8 +830,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftPadding" type="PaddingType"/>
     <xs:attribute name="TopPadding" type="PaddingType"/>
@@ -869,8 +869,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -880,7 +880,7 @@
   
   <xs:attributeGroup name="UnorderedListAttributeGroup">
     <xs:attribute name="ListStyle" type="UnorderedListStyleType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
     <xs:attribute name="LeftMargin" type="MarginType"/>
     <xs:attribute name="TopMargin" type="MarginType"/>
@@ -895,8 +895,8 @@
     <xs:attribute name="FontStyle" type="FontStyleType"/>
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
   </xs:attributeGroup>
 
   <xs:attributeGroup name="BlockTextAttributeGroup">
@@ -907,8 +907,8 @@
     <xs:attribute name="FontWeight" type="FontWeightType"/>
     <xs:attribute name="UnderlineStyle" type="UnderlineStyleType"/>
     <xs:attribute name="LineHeight" type="LineHeightType"/>
-    <xs:attribute name="FontColor" type="ColorType"/>
-    <xs:attribute name="BackgroundColor" type="ColorType"/>
+    <xs:attribute name="Foreground" type="ColorType"/>
+    <xs:attribute name="Background" type="ColorType"/>
     <xs:attribute name="HorizontalAlignment" type="HorizontalAlignmentType"/>
     
   </xs:attributeGroup>
