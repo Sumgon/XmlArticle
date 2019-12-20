@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Article xmlns="http://sumgon.org/Article.xsd">
-  <StyleDefinitions>
-    <Section1Style BackgroundColor="Blue"/>
-  </StyleDefinitions>
+  <GlobalStyles>
+    <TitleStyle/>
+    <Section1HeadingStyle/>
+    <SubscriptStyle/>
+  </GlobalStyles>
   <Title>
     11
   </Title>
-  <Body>
-    <Section1>
-      <Heading FontColor="Red">12222222222heading</Heading>
-      <Paragraph>11</Paragraph>
-      <Paragraph >22</Paragraph>
-      <Video Source="11"/>
-      
-    </Section1>
-  </Body>
+  <Section1>
+    <Heading FontColor="Red">12222222222heading</Heading>
+    <Paragraph>11</Paragraph>
+    <Paragraph >22</Paragraph>
+    <Video Source="11"/>
+
+  </Section1>
 </Article>

@@ -75,22 +75,6 @@
   
   <!--End Tab Title-->
   
-  <!--Style Sheets-->
-  
-  <xsl:template match="x:StyleSheets">
-    <xsl:apply-templates select="x:StyleSheet"/> 
-  </xsl:template>
-  
-  <xsl:template match="x:StyleSheet">
-    <link type="text/css" rel="stylesheet">
-      <xsl:attribute name="href">
-        <xsl:value-of select="@Source"/>      
-      </xsl:attribute>   
-    </link> 
-  </xsl:template>
-  
-  <!--End Style Sheets-->
-  
   <!--Article-->
   <xsl:template match="x:Article">
     <article>
@@ -134,7 +118,7 @@
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedFontWeight">
-        <xsl:call-template name="FontWeightTypeTemplate">
+        <xsl:call-template name="FontWeightTemplate">
           <xsl:with-param name="FontWeight" select="preceding-sibling::x:StyleDefinitions/x:TitleStyle/@FontWeight"/>
         </xsl:call-template>
       </xsl:variable>
@@ -193,7 +177,7 @@
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedFontWeight">
-        <xsl:call-template name="FontWeightTypeTemplate">
+        <xsl:call-template name="FontWeightTemplate">
           <xsl:with-param name="FontWeight" select="preceding-sibling::x:StyleDefinitions/x:SubtitleStyle/@FontWeight"/>
         </xsl:call-template>
       </xsl:variable>
@@ -236,7 +220,7 @@
           <xsl:value-of select="@Source"/>
         </xsl:attribute>
       </xsl:if>
-      <xsl:call-template name="TextContentTypeTemplate">
+      <xsl:call-template name="TextTypeTemplate">
         <xsl:with-param name="Tag" select="'span'"/>     
       </xsl:call-template>      
     </a>
@@ -249,11 +233,11 @@
           <xsl:when test="self::x:Paragraph">
             <xsl:call-template name="ParagraphTemplate"/>
           </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
+          <xsl:when test="self::x:BlockImage">
+            <xsl:call-template name="BlockImageTemplate"/>
           </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
+          <xsl:when test="self::x:Code">
+            <xsl:call-template name="CodeTemplate"/>
           </xsl:when>
           <xsl:when test="self::x:BlockQuote">
             <xsl:call-template name="BlockQuoteTemplate"/>
@@ -275,13 +259,13 @@
           </xsl:when>
         </xsl:choose>
       </xsl:for-each>-->
-      <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+      <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
     </div>
   </xsl:template>
 
   <xsl:template match="x:Introduction">
     <div class="introduction">
-      <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+      <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
     </div>
   </xsl:template>
   
@@ -294,11 +278,11 @@
         <xsl:when test="self::x:Paragraph">
           <xsl:call-template name="ParagraphTemplate"/>
         </xsl:when>
-        <xsl:when test="self::x:Image">
-          <xsl:call-template name="ImageTemplate"/>
+        <xsl:when test="self::x:BlockImage">
+          <xsl:call-template name="BlockImageTemplate"/>
         </xsl:when>
-        <xsl:when test="self::x:CodeBlock">
-          <xsl:call-template name="CodeBlockTemplate"/>
+        <xsl:when test="self::x:Code">
+          <xsl:call-template name="CodeTemplate"/>
         </xsl:when>
         <xsl:when test="self::x:BlockQuote">
           <xsl:call-template name="BlockQuoteTemplate"/>
@@ -321,7 +305,7 @@
       </xsl:choose>
     </xsl:for-each>-->
     <div class="body">
-      <xsl:apply-templates select="x:Section1|x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+      <xsl:apply-templates select="x:Section1|x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
     </div>
   </xsl:template>
   
@@ -334,78 +318,108 @@
   
   <xsl:template match="x:Section1">
     <xsl:apply-templates select="x:Heading" mode="Section1"/>
-    <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+    <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
   </xsl:template>
 
   <xsl:template match="x:Section2">
     <xsl:apply-templates select="x:Heading" mode="Section2"/>
-    <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+    <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
   </xsl:template>
   
   <xsl:template match="x:Section3">
     <xsl:apply-templates select="x:Heading" mode="Section3"/>
-    <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+    <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
   </xsl:template>
 
   <xsl:template match="x:Section4">
     <xsl:apply-templates select="x:Heading" mode="Section4"/>
-    <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+    <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
   </xsl:template>
 
   <xsl:template match="x:Section5">
     <xsl:apply-templates select="x:Heading" mode="Section5"/>
-    <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+    <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
   </xsl:template>
 
   <xsl:template match="x:Section6">
     <xsl:apply-templates select="x:Heading" mode="Section6"/>
-    <xsl:apply-templates select="x:Paragraph|x:Image|x:CodeBlock|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
+    <xsl:apply-templates select="x:Paragraph|x:BlockImage|x:Code|x:BlockQuote|x:Video|x:Audio|x:OrderedList|x:UnorderedList|x:Table"/>
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section1">
+    <xsl:call-template name="SectionHeadingTemplate">
+      <xsl:with-param name="Tag" select="'h1'"/>
+      <xsl:with-param name="FontSizeLocal" select="@FontSize"/>
+      <xsl:with-param name="FontSizeGlobal" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontSize"/>
+      
+    </xsl:call-template>
     <h1>
       <xsl:variable name="ParsedFontSize">
-        <xsl:call-template name="FontSizeTemplate">
-          <xsl:with-param name="FontSize" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontSize"/>
-        </xsl:call-template>
+        <xsl:choose>
+          <xsl:when test="@FontSize">
+            <xsl:call-template name="FontSizeTemplate">
+              <xsl:with-param name="FontSize" select="@FontSize"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontSize">
+            <xsl:call-template name="FontSizeTemplate">
+              <xsl:with-param name="FontSize" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontSize"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:variable>
       <xsl:variable name="ParsedFontFamily">
-        <xsl:call-template name="FontFamilyTemplate">
-          <xsl:with-param name="FontFamily" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontFamily"/>
-        </xsl:call-template>
+        <xsl:choose>
+          <xsl:when test="@FontFamily">
+            <xsl:call-template name="FontFamilyTemplate">
+              <xsl:with-param name="FontFamily" select="@FontFamily"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontFamily">
+            <xsl:call-template name="FontFamilyTemplate">
+              <xsl:with-param name="FontFamily" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontFamily"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+
       </xsl:variable>
       <xsl:variable name="ParsedFontStretch">
         <xsl:call-template name="FontStretchTemplate">
-          <xsl:with-param name="FontStretch" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontStretch"/>
+          <xsl:with-param name="FontStretch" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontStretch"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedFontStyle">
         <xsl:call-template name="FontStyleTemplate">
-          <xsl:with-param name="FontStyle" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontStyle"/>
+          <xsl:with-param name="FontStyle" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontStyle"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedFontWeight">
-        <xsl:call-template name="FontWeightTypeTemplate">
-          <xsl:with-param name="FontWeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontWeight"/>
+        <xsl:call-template name="FontWeightTemplate">
+          <xsl:with-param name="FontWeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontWeight"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedFontColor">
         <xsl:call-template name="FontColorTemplate">
-          <xsl:with-param name="FontColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@FontColor"/>
+          <xsl:with-param name="FontColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@FontColor"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedBackgroundColor">
         <xsl:call-template name="BackgroundColorTemplate">
-          <xsl:with-param name="BackgroundColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@BackgroundColor"/>
+          <xsl:with-param name="BackgroundColor" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@BackgroundColor"/>
         </xsl:call-template>
       </xsl:variable>
       <xsl:variable name="ParsedLineHeight">
         <xsl:call-template name="LineHeightTemplate">
-          <xsl:with-param name="LineHeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1Style/@LineHeight"/>
+          <xsl:with-param name="LineHeight" select="ancestor::x:Article/x:StyleDefinitions/x:Section1HeadingStyle/@LineHeight"/>
         </xsl:call-template>
       </xsl:variable>
       
-
       <xsl:if test="$ParsedFontSize!='' or $ParsedFontFamily!='' or $ParsedFontStretch!='' or $ParsedFontStyle!='' or $ParsedFontWeight!='' or $ParsedFontColor!='' or $ParsedBackgroundColor!='' or $ParsedLineHeight!=''">
         <xsl:attribute name="style">
           <xsl:value-of select="concat($ParsedFontSize,$ParsedFontFamily,$ParsedFontStretch,$ParsedFontStyle,$ParsedFontWeight,$ParsedFontColor,$ParsedBackgroundColor,$ParsedLineHeight)"/>
@@ -416,33 +430,193 @@
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section2">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'h2'"/>
     </xsl:call-template>  
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section3">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'h3'"/>
     </xsl:call-template>  
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section4">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'h4'"/>
     </xsl:call-template>  
   </xsl:template>
   
   <xsl:template match="x:Heading" mode="Section5">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'h5'"/>
     </xsl:call-template>  
   </xsl:template>
 
   <xsl:template match="x:Heading" mode="Section6">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'h6'"/>
     </xsl:call-template>  
+  </xsl:template>
+
+  <xsl:template name="SectionHeadingTemplate">
+    <xsl:param name="Tag"/>
+    <xsl:param name="FontSizeLocal"/>
+    <xsl:param name="FontSizeGlobal"/>
+    <xsl:param name="FontFamilyLocal"/>
+    <xsl:param name="FontFamilyGlobal"/>
+    <xsl:param name="FontStretchLocal"/>
+    <xsl:param name="FontStretchGlobal"/>
+    <xsl:param name="FontStyleLocal"/>
+    <xsl:param name="FontStyleGlobal"/>
+    <xsl:param name="FontWeightLocal"/>
+    <xsl:param name="FontWeightGlobal"/>
+    <xsl:param name="FontColorLocal"/>
+    <xsl:param name="FontColorGlobal"/>
+    <xsl:param name="BackgroundColorLocal"/>
+    <xsl:param name="BackgroundColorGlobal"/>
+    <xsl:param name="LineHeightLocal"/>
+    <xsl:param name="LineHeightGlobal"/>
+
+    <xsl:element name="{$Tag}">
+      <xsl:variable name="ParsedFontSize">
+        <xsl:choose>
+          <xsl:when test="$FontSizeLocal!=''">
+            <xsl:call-template name="FontSizeTemplate">
+              <xsl:with-param name="FontSize" select="$FontSizeLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$FontSizeGlobal!=''">
+            <xsl:call-template name="FontSizeTemplate">
+              <xsl:with-param name="FontSize" select="$FontSizeGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontFamily">
+        <xsl:choose>
+          <xsl:when test="$FontFamilyLocal!=''">
+            <xsl:call-template name="FontFamilyTemplate">
+              <xsl:with-param name="FontFamily" select="$FontFamilyLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$FontFamilyGlobal!=''">
+            <xsl:call-template name="FontFamilyTemplate">
+              <xsl:with-param name="FontFamily" select="$FontFamilyGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontStretch">
+        <xsl:choose>
+          <xsl:when test="$FontStretchLocal!=''">
+            <xsl:call-template name="FontStretchTemplate">
+              <xsl:with-param name="FontStretch" select="$FontStretchLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$FontStretchGlobal!=''">
+            <xsl:call-template name="FontStretchTemplate">
+              <xsl:with-param name="FontStretch" select="$FontStretchGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontStyle">
+        <xsl:choose>
+          <xsl:when test="$FontStyleLocal!=''">
+            <xsl:call-template name="FontStyleTemplate">
+              <xsl:with-param name="FontStyle" select="$FontStyleLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$FontStyleGlobal!=''">
+            <xsl:call-template name="FontStyleTemplate">
+              <xsl:with-param name="FontStyle" select="$FontStyleGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontWeight">
+        <xsl:choose>
+          <xsl:when test="$FontWeightLocal!=''">
+            <xsl:call-template name="FontWeightTemplate">
+              <xsl:with-param name="FontWeight" select="$FontWeightLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$FontWeightGlobal!=''">
+            <xsl:call-template name="FontWeightTemplate">
+              <xsl:with-param name="FontWeight" select="$FontWeightGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedFontColor">
+        <xsl:choose>
+          <xsl:when test="$FontColorLocal!=''">
+            <xsl:call-template name="FontColorTemplate">
+              <xsl:with-param name="FontColor" select="$FontColorLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$FontColorGlobal!=''">
+            <xsl:call-template name="FontColorTemplate">
+              <xsl:with-param name="FontColor" select="$FontColorGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedBackgroundColor">
+        <xsl:choose>
+          <xsl:when test="$BackgroundColorLocal!=''">
+            <xsl:call-template name="BackgroundColorTemplate">
+              <xsl:with-param name="BackgroundColor" select="$BackgroundColorLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$BackgroundColorGlobal!=''">
+            <xsl:call-template name="BackgroundColorTemplate">
+              <xsl:with-param name="BackgroundColor" select="$BackgroundColorGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="ParsedLineHeight">
+        <xsl:choose>
+          <xsl:when test="$LineHeightLocal!=''">
+            <xsl:call-template name="LineHeightTemplate">
+              <xsl:with-param name="LineHeight" select="$LineHeightLocal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="$LineHeightGlobal!=''">
+            <xsl:call-template name="LineHeightTemplate">
+              <xsl:with-param name="LineHeight" select="$LineHeightGlobal"/>
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+      <xsl:value-of select="text()"/>      
+    </xsl:element>
   </xsl:template>
   
   <!--End Header-->
@@ -673,13 +847,13 @@
         </xsl:attribute>
       </xsl:if>
       
-      <xsl:apply-templates select="text()|x:StyledText|x:Hyperlink|x:Image"/>
+      <xsl:apply-templates select="text()|x:StyledText|x:Hyperlink|x:BlockImage"/>
     </td>
   </xsl:template>
 
   <xsl:template match="x:Caption" mode="Table">
     <caption>
-      <xsl:call-template name="TextContentTypeTemplate"/>
+      <xsl:call-template name="TextTypeTemplate"/>
     </caption>
   </xsl:template>
   
@@ -731,11 +905,11 @@
           <xsl:when test="self::x:UnorderedList">
             <xsl:call-template name="UnorderedListTemplate"/>          
           </xsl:when>
-          <xsl:when test="self::x:Image">
-            <xsl:call-template name="ImageTemplate"/>
+          <xsl:when test="self::x:BlockImage">
+            <xsl:call-template name="BlockImageTemplate"/>
           </xsl:when>
-          <xsl:when test="self::x:CodeBlock">
-            <xsl:call-template name="CodeBlockTemplate"/>
+          <xsl:when test="self::x:Code">
+            <xsl:call-template name="CodeTemplate"/>
           </xsl:when>
           <xsl:when test="self::x:BlockQuote">
             <xsl:call-template name="BlockQuoteTemplate"/>
@@ -761,7 +935,7 @@
   </xsl:template>
   
   <xsl:template match="x:Header" mode="List">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'span'"/>    
     </xsl:call-template>
   </xsl:template>
@@ -794,7 +968,7 @@
           <xsl:call-template name="FontStyleTemplate">
             <xsl:with-param name="FontStyle" select="@FontStyle"/>       
           </xsl:call-template>
-          <xsl:call-template name="FontWeightTypeTemplate">
+          <xsl:call-template name="FontWeightTemplate">
             <xsl:with-param name="FontWeight" select="@FontWeight"/>       
           </xsl:call-template>
           <xsl:call-template name="FontColorTemplate">
@@ -898,7 +1072,7 @@
 
   <xsl:template match="x:Header" mode="References">
     <div class="references-header">
-      <xsl:call-template name="TextContentTypeTemplate">
+      <xsl:call-template name="TextTypeTemplate">
         <xsl:with-param name="Tag" select="'span'"/>
       </xsl:call-template>
     </div>
@@ -918,7 +1092,7 @@
     </blockquote>
   </xsl:template>
   
-  <xsl:template match="x:CodeBlock" name="CodeBlockTemplate">
+  <xsl:template match="x:Code" name="CodeTemplate">
     <pre>
       <xsl:attribute name="class">
         <xsl:text>line-numbers</xsl:text>
@@ -953,7 +1127,7 @@
           <xsl:value-of select="@Source"/>       
         </xsl:when>
         <xsl:otherwise>
-          <xsl:call-template name="TextContentTypeTemplate">
+          <xsl:call-template name="TextTypeTemplate">
             <xsl:with-param name="Tag" select="'span'"/>        
           </xsl:call-template>
         </xsl:otherwise>
@@ -961,10 +1135,10 @@
     </a>
   </xsl:template>
     
-  <xsl:template match="x:Image" name="ImageTemplate">
+  <xsl:template match="x:BlockImage" name="BlockImageTemplate">
     <div>
       <xsl:attribute name="class">
-        <xsl:text>image-container</xsl:text>
+        <xsl:text>BlockImage-container</xsl:text>
         <xsl:text> </xsl:text>
         <xsl:if test="@HorizontalAlignment">
           <xsl:call-template name="HorizontalAlignmentTemplate">
@@ -993,7 +1167,7 @@
       <xsl:if test="@Label">
         <div>
           <xsl:attribute name="class">
-            <xsl:text>image-description</xsl:text>
+            <xsl:text>BlockImage-description</xsl:text>
           </xsl:attribute>
           <span>
             <xsl:value-of select="@Description"/>
@@ -1068,31 +1242,31 @@
   </xsl:template>
   
   <xsl:template match="x:DeletedText">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'del'"/>   
     </xsl:call-template>
   </xsl:template>
   
   <xsl:template match="x:InsertedText">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'ins'"/>   
     </xsl:call-template>
   </xsl:template>
   
   <xsl:template match="x:MarkedText">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'mark'"/>   
     </xsl:call-template>
   </xsl:template>
   
   <xsl:template match="x:Superscript">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'sup'"/>   
     </xsl:call-template>
   </xsl:template>
     
   <xsl:template match="x:Subscript">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'sub'"/>   
     </xsl:call-template>
   </xsl:template>
@@ -1111,19 +1285,19 @@
           <xsl:value-of select="@Source"/>
         </xsl:attribute>     
       </xsl:if>     
-      <xsl:call-template name="TextContentTypeTemplate">
+      <xsl:call-template name="TextTypeTemplate">
         <xsl:with-param name="Tag" select="'span'"/>      
       </xsl:call-template>      
     </q>
   </xsl:template>   
     
   <xsl:template name="StyledTextTemplate" match="x:StyledText">
-    <xsl:call-template name="TextContentTypeTemplate">
+    <xsl:call-template name="TextTypeTemplate">
       <xsl:with-param name="Tag" select="'span'"/>    
     </xsl:call-template>
   </xsl:template>
   
-  <xsl:template name="TextContentTypeTemplate">
+  <xsl:template name="TextTypeTemplate">
     <xsl:param name="Tag"/>
     <xsl:element name="{$Tag}">
       <xsl:if test="@UnderlineStyle">
@@ -1147,7 +1321,7 @@
           <xsl:call-template name="FontStyleTemplate">
             <xsl:with-param name="FontStyle" select="@FontStyle"/>       
           </xsl:call-template>
-          <xsl:call-template name="FontWeightTypeTemplate">
+          <xsl:call-template name="FontWeightTemplate">
             <xsl:with-param name="FontWeight" select="@FontWeight"/>       
           </xsl:call-template>
           <xsl:call-template name="FontColorTemplate">
@@ -1237,7 +1411,7 @@
       <xsl:call-template name="FontStyleTemplate">
         <xsl:with-param name="FontStyle" select="$FontStyle"/>
       </xsl:call-template>
-      <xsl:call-template name="FontWeightTypeTemplate">
+      <xsl:call-template name="FontWeightTemplate">
         <xsl:with-param name="FontWeight" select="$FontWeight"/>
       </xsl:call-template>
       <xsl:call-template name="FontColorTemplate">
@@ -1319,7 +1493,7 @@
     </xsl:choose>
   </xsl:template>
   
-  <xsl:template name="FontWeightTypeTemplate">
+  <xsl:template name="FontWeightTemplate">
     <xsl:param name="FontWeight"/>
     <xsl:choose>
       <xsl:when test="$FontWeight and $FontWeight!=''">
