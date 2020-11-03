@@ -9,10 +9,10 @@
     11
   </Title>
   <Section1>
-    <Heading Foreground="Red">12222222222heading</Heading>
+    <Heading Foreground="Red2">12222222222heading</Heading>
     <Paragraph>11</Paragraph>
-    <Paragraph >22</Paragraph>
+    <Paragraph>22</Paragraph>
     <Video Source="11"/>
-
+    
   </Section1>
 </Article>
